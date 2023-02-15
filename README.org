@@ -1,0 +1,248 @@
+#+title: Emacs Config
+#+author: Lucas Fernandez Cofré
+#+startup: overview
+
+
+* Comportamiento General
+
+
+#+begin_src emacs-lisp
+  (menu-bar-mode -1)
+  (tool-bar-mode -1)
+  (setq inhibit-splash-screen t)
+  (scroll-bar-mode -1) 
+  (blink-cursor-mode -1)
+  (global-set-key [(control x) (k)] 'kill-this-buffer)
+  (setq search-whitespace-regexp ".*")
+  (setq isearch-lax-whitespace t)
+  (setq isearch-regexp-lax-whitespace nil)
+  (setq initial-scratch-message "\n;; Bienvenido!\n\n\n")
+
+
+  ;; === Smooth scroll ==
+  (setq redisplay-dont-pause t
+        scroll-margin 1
+        scroll-step 1
+        scroll-conservatively 10000
+        scroll-preserve-screen-position 1)
+
+  ;; Unfill Function
+  ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
+  (defun unfill-paragraph (&optional region)
+    "Takes a multi-line paragraph and makes it into a single line of text."
+    (interactive (progn (barf-if-buffer-read-only) '(t)))
+    (let ((fill-column (point-max))
+          ;; This would override `fill-column' if it's an integer.
+          (emacs-lisp-docstring-fill-column t))
+      (fill-paragraph nil region)))
+#+end_src
+
+* Repositorios
+#+begin_src emacs-lisp
+  (require 'package)
+
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+			   ("elpa" . "https://elpa.gnu.org/packages/")))
+
+  (package-initialize)
+  (unless package-archive-contents
+    (package-refresh-contents))
+
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+
+  (require 'use-package)
+  (setq use-package-always-ensure t)
+#+end_src
+
+* Packages
+
+#+begin_src emacs-lisp
+  ;; Enable vertico
+  (use-package vertico
+    :init
+    (vertico-mode)
+
+    ;; Different scroll margin
+    ;; (setq vertico-scroll-margin 0)
+
+    ;; Show more candidates
+    ;; (setq vertico-count 20)
+
+    ;; Grow and shrink the Vertico minibuffer
+    ;; (setq vertico-resize t)
+
+    ;; Optionally enable cycling for `vertico-next' and `vertico-previous'.
+    ;; (setq vertico-cycle t)
+    )
+
+  ;; Persist history over Emacs restarts. Vertico sorts by history position.
+  (use-package savehist
+    :init
+    (savehist-mode))
+
+  ;; A few more useful configurations...
+  (use-package emacs
+    :init
+    ;; Add prompt indicator to `completing-read-multiple'.
+    ;; We display [CRM<separator>], e.g., [CRM,] if the separator is a comma.
+    (defun crm-indicator (args)
+      (cons (format "[CRM%s] %s"
+                    (replace-regexp-in-string
+                     "\\`\\[.*?]\\*\\|\\[.*?]\\*\\'" ""
+                     crm-separator)
+                    (car args))
+            (cdr args)))
+    (advice-add #'completing-read-multiple :filter-args #'crm-indicator)
+
+    ;; Do not allow the cursor in the minibuffer prompt
+    (setq minibuffer-prompt-properties
+          '(read-only t cursor-intangible t face minibuffer-prompt))
+    (add-hook 'minibuffer-setup-hook #'cursor-intangible-mode)
+
+    ;; Emacs 28: Hide commands in M-x which do not work in the current mode.
+    ;; Vertico commands are hidden in normal buffers.
+    ;; (setq read-extended-command-predicate
+    ;;       #'command-completion-default-include-p)
+
+    ;; Enable recursive minibuffers
+    (setq enable-recursive-minibuffers t))
+
+  (use-package orderless
+    :init
+    (setq completion-styles '(orderless basic)
+          completion-category-defaults nil
+          completion-category-overrides '((file (styles partial-completion)))))
+
+  ;; Distraction-free screen
+  (use-package olivetti
+    :hook (org-mode . olivetti-mode)
+    :bind
+    (("<f9>" . olivetti-mode)))
+
+  (use-package consult
+    :bind (("C-x b"       . consult-buffer)
+           ("M-y"         . consult-yank-pop)
+           ("C-x C-SPC"   . consult-global-mark)
+           ("C-x M-:"     . consult-complex-command)
+           :map dired-mode-map
+           ("O" . consult-file-externally)
+           :map help-map
+           ("a" . consult-apropos)
+           :map minibuffer-local-map
+           ("M-r" . consult-history))
+    :custom
+    (completion-in-region-function #'consult-completion-in-region))
+
+  (use-package modus-themes)
+#+end_src
+
+* Theme
+
+#+begin_src emacs-lisp
+  (load-theme 'modus-operandi-tinted t)            ; Light theme
+#+end_src
+
+* Dired
+
+#+begin_src emacs-lisp
+  (add-hook 'dired-mode-hook 'dired-hide-details-mode)
+#+end_src
+
+* Org
+
+#+begin_src emacs-lisp
+  (add-hook 'org-mode-hook 'turn-on-flyspell)
+  (setq org-startup-indented t
+        org-pretty-entities t
+        org-hide-leading-stars t
+        org-hide-emphasis-markers t
+        ;;        org-startup-with-inline-images t
+        org-image-actual-width '(300))
+#+end_src
+
+* Org-Agenda
+
+#+begin_src emacs-lisp
+  ;; Calendar
+  (setq calendar-date-style 'iso)
+  (setq calendar-week-start-day 1)
+  (setq calendar-day-header-array ["Do" "Lu" "Ma" "Mi" "Ju" "Vi" "Sá"])
+  (setq calendar-day-name-array ["domingo" "lunes" "martes" "miércoles" "jueves" "viernes" "sábado"])
+  (setq calendar-month-abbrev-array ["Ene" "Feb" "Mar" "Abr" "May" "Jun" "Jul" "Ago" "Sep" "Oct" "Nov" "Dic"])
+  (setq calendar-month-name-array ["enero" "febrero" "marzo" "abril" "mayo" "junio" "julio" "agosto" "septiembre" "octubre" "noviembre" "diciembre"])
+  ;; Agenda
+  (setq org-agenda-start-with-log-mode t)
+  (setq org-log-done 'time)
+  (setq org-log-into-drawer t)
+
+  (setq org-ellipsis " ▼ ")
+
+  ;; Resume clocking task when emacs is restarted
+  (org-clock-persistence-insinuate)
+  ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
+  (setq org-clock-history-length 23)
+  ;; Resume clocking task on clock-in if the clock is open
+  (setq org-clock-in-resume t)
+  ;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
+  (setq org-clock-out-remove-zero-time-clocks t)
+  ;; Clock out when moving task to a done state
+  (setq org-clock-out-when-done t)
+  ;; Save the running clock and all clock history when exiting Emacs, load it on startup
+  (setq org-clock-persist t)
+  ;; Include current clocking task in clock reports
+  (setq org-clock-report-include-clocking-task t)
+
+  (setq org-return-follows-link t)
+#+end_src
+
+* Latex
+
+Esto es algo tomado de Jake B por lo que recomiendo ver su video que
+dejaré por algun lado [[https://jakebox.github.io/youtube/org_latex_video.html][aquí]].
+
+#+begin_src emacs-lisp
+  (with-eval-after-load 'ox-latex
+    (add-to-list 'org-latex-classes
+                 '("org-plain-latex"
+                   "\\documentclass{article}
+             [NO-DEFAULT-PACKAGES]
+             [PACKAGES]
+             [EXTRA]"
+                   ("\\section{%s}" . "\\section*{%s}")
+                   ("\\subsection{%s}" . "\\subsection*{%s}")
+                   ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+                   ("\\paragraph{%s}" . "\\paragraph*{%s}")
+                   ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+#+end_src
+
+* Key Maps
+
+Por último, estableceremos los atajos de teclado para que alguna de las funciones más utilizadas estén "más a la mano" a la hora de trabajar.
+
+#+begin_src emacs-lisp
+  ;; Org
+  (global-set-key (kbd "C-c c") #'org-capture)
+  (global-set-key (kbd "C-c a") #'org-agenda)
+  ;; Buffer
+  (global-set-key (kbd "C-x v =") #'diff-buffer-with-file)
+  ;; Utilities
+  (global-set-key (kbd "C-x c") 'calendar)
+  ;; Comportamiento
+  (global-set-key (kbd "M-i") 'imenu)
+  ;; Gnus
+  (global-set-key (kbd "C-x g") 'gnus)
+  ;; toggle theme
+  (define-key global-map (kbd "<f5>") #'modus-themes-toggle)
+  ;; Unfill
+  (define-key global-map "\M-Q" 'unfill-paragraph)
+  #+end_src
+
+* Babel
+
+Esto es para evaluar comandos en shell desde un documento org.
+
+#+begin_src emacs-lisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages '((shell . t)))
+#+end_src
