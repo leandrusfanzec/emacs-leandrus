@@ -5,19 +5,18 @@
 
 * Comportamiento General
 
-
 #+begin_src emacs-lisp
   (menu-bar-mode -1)
   (tool-bar-mode -1)
   (setq inhibit-splash-screen t)
-  (scroll-bar-mode -1) 
+  (scroll-bar-mode -1)
   (blink-cursor-mode -1)
   (global-set-key [(control x) (k)] 'kill-this-buffer)
   (setq search-whitespace-regexp ".*")
   (setq isearch-lax-whitespace t)
   (setq isearch-regexp-lax-whitespace nil)
-  (setq initial-scratch-message "\n;; Bienvenido!\n\n\n")
-
+  (setq initial-scratch-message "\n;; Bienvenido a Emacs, esto es un buffer de scratch!\n\n\n")
+  (setq user-full-name "NOMBREUSUARIO")
 
   ;; === Smooth scroll ==
   (setq redisplay-dont-pause t
@@ -27,7 +26,7 @@
         scroll-preserve-screen-position 1)
 
   ;; Unfill Function
-  ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph    
+  ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
   (defun unfill-paragraph (&optional region)
     "Takes a multi-line paragraph and makes it into a single line of text."
     (interactive (progn (barf-if-buffer-read-only) '(t)))
@@ -38,6 +37,7 @@
 #+end_src
 
 * Repositorios
+
 #+begin_src emacs-lisp
   (require 'package)
 
@@ -135,6 +135,8 @@
     (completion-in-region-function #'consult-completion-in-region))
 
   (use-package modus-themes)
+
+  (use-package denote)
 #+end_src
 
 * Theme
@@ -157,8 +159,9 @@
         org-pretty-entities t
         org-hide-leading-stars t
         org-hide-emphasis-markers t
-        ;;        org-startup-with-inline-images t
+        org-startup-with-inline-images t
         org-image-actual-width '(300))
+  (setq org-ellipsis " ▼ ")
 #+end_src
 
 * Org-Agenda
@@ -176,7 +179,6 @@
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
 
-  (setq org-ellipsis " ▼ ")
 
   ;; Resume clocking task when emacs is restarted
   (org-clock-persistence-insinuate)
@@ -198,7 +200,7 @@
 
 * Latex
 
-Esto es algo tomado de Jake B por lo que recomiendo ver su video que
+Esto es algo tomado de Jake B por lo que recomiendo ver su vídeo que
 dejaré por algun lado [[https://jakebox.github.io/youtube/org_latex_video.html][aquí]].
 
 #+begin_src emacs-lisp
@@ -230,19 +232,6 @@ Por último, estableceremos los atajos de teclado para que alguna de las funcion
   (global-set-key (kbd "C-x c") 'calendar)
   ;; Comportamiento
   (global-set-key (kbd "M-i") 'imenu)
-  ;; Gnus
-  (global-set-key (kbd "C-x g") 'gnus)
-  ;; toggle theme
-  (define-key global-map (kbd "<f5>") #'modus-themes-toggle)
   ;; Unfill
   (define-key global-map "\M-Q" 'unfill-paragraph)
-  #+end_src
-
-* Babel
-
-Esto es para evaluar comandos en shell desde un documento org.
-
-#+begin_src emacs-lisp
-(org-babel-do-load-languages
- 'org-babel-load-languages '((shell . t)))
 #+end_src
