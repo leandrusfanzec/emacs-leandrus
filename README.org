@@ -42,6 +42,10 @@ entraría a conocerlo de manera un poco más amigable.
 Cabe señalar que esto que se ve aquí consiste en la misma configuración del
 programa el cual se ejecutará al iniciar el programa.
 
+Por último, al iniciar por primera vez el programa aparecerá un aviso respecto
+del paquete olivetti, pero que a partir del segundo lanzamiento ya no saldrá
+más.
+
 * Instalación
 
 Para realizar la instalación se debiera copiar este repositorio dentro de la misma carpeta de Emacs para ejecutarlo al inicio del programa:
@@ -53,14 +57,6 @@ Para realizar la instalación se debiera copiar este repositorio dentro de la mi
 > cp README.org ~/.emacs.d/
 
 > cp init.el ~/.emacs.d/
-
-Claramente el directorio de Emacs no debiese confundirse con el repositorio de
-git, por lo que seríá bueno que el usuario clonara el repositorio en cualquier
-otro directorio y luego de eso copiar estos archivos dentro de la carpeta
-/".emacs.d"/.
-
-Con todo, para un usuario que quiera conocer el funcionamiento y tener así una
-primera aproximación creo que sería de gran ayuda.
 
 * Comportamiento General
 
