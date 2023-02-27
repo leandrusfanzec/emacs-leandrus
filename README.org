@@ -1,6 +1,9 @@
 #+title: Emacs Config
-#+author: Lucas Fernandez Cofré
+#+author: Leandrus Fanzec
 #+startup: overview
+#+SETUPFILE: ~/.emacs.d/latex.setup
+
+[[file:wellcome.png]]
 
 Esta es una configuración muy básica pero a la vez cómoda que puede ser de
 utilidad a los usuarios que deseen conocer por primera vez el poder Emacs.
@@ -55,13 +58,17 @@ usuario.
 
 Para un mejor uso de esta configuración, recomendaría al usuario iniciar el
 programa Emacs como daemon y luego simplemente invocar los clientes. Lo que en
-línea de comanto es algo así dependiendo de la distribución:
+línea de comando es algo así dependiendo de la distribución:
 
 > emacs --daemon
 
 > emacsclient -c
 
-Esto puede variar, en general esa es la ídea.
+Al hacer este último comando debiese aparecer nuestro primer buffer del programa:
+
+[[file:primerbuffer.png]]
+
+Esto puede variar, en general esa es la idea.
 
 En segundo lugar, por algún motivo la compilación de olivetti aparecen algunos
 avisos en el buffer "Compile.log" los cuales no he podido resolver, pero que no
@@ -83,11 +90,17 @@ herramientas.
 
 básicamente al inicio del archivo org se debe establecer lo siguiente:
 
-> #+SETUP: ~/.emacs.d/latex.setup
+> #+SETUPFILE: ~/.emacs.d/latex.setup
 
 Esto siguiendo las instrucciones de instalación señalados un poco más arriba,
 dado que la dirección tiene que apuntar específicamente a ese archivo, el cual
 puede ser modificado despues por el usuario.
+
+Para hacerlo aun más didáctico este mismo archivo ya se encuentra con esa configuración y si quieres probar como funciona basta con presionar C-c e, y luego: l (Latex), o (generar archivo pdf y abrirlo).
+
+[[file:convertir.png]]
+
+Recuerde que latex debe estar instalado con sus paquetes extras.
 
 * Comportamiento General
 
