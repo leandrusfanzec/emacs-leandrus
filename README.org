@@ -76,6 +76,16 @@ son impedimento para el normal funcionamiento normal de esta configuración.
 Pero si les aparece, solamente será la primera vez (cuando se compile), pero no
 volverá a aparecer (al menos por ese motivo).
 
+Respecto del tema seleccionado, modus-operandi-tinted, se trata de una
+variación del paquete modus-theme que personalmente me gusta, sin embargo se
+puede cambiar facilmente presionando M-x, con el comando:
+
+> modus-themes-select
+
+Que, en su variante dark también me gusta mucho (modus-vivendi-tinted).
+Recomiendo el uso de estos temas por su facilidad y flexibilidad para
+configurar.
+
 Por último, siempre, siempre recurra al manual con "C-h i". Es una enorme
 fuente de información importante.
 
