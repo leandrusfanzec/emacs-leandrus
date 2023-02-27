@@ -53,9 +53,9 @@ usuario.
 
 * Consejos para Uso
 
-Para el mejor uso de esta configuración recomendaría, como ya es conocido por
-cualquiera que use Emacs,iniciarlo como daemon y luego simplemente invocar los
-clientes. Lo que en línea de comanto es algo así dependiendo de la distribución:
+Para un mejor uso de esta configuración, recomendaría al usuario iniciar el
+programa Emacs como daemon y luego simplemente invocar los clientes. Lo que en
+línea de comanto es algo así dependiendo de la distribución:
 
 > emacs --daemon
 
