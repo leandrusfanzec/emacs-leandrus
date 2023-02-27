@@ -5,17 +5,8 @@
 Esta es una configuración muy básica pero a la vez cómoda que puede ser de
 utilidad a los usuarios que deseen conocer por primera vez el poder Emacs.
 
-Esta configuración está principalmente echa para la versión 28. Creo que si se
-quiere probar con el tema modus-themes en una versión anterior a esa, se
-tendría que instalar dicho paquete y luego cargar ese tema, por lo que si lo
-prueban en una versión anterior a la 28, no encontrará el tema que está
-definido por defecto.
-
-Para estos efectos (y así usar el tema que se carga por defecto en esta configuración en una versión anterior a la 28), se tendría que agregar la siguiente línea en la sección "Packages":
-
-> (use-package modus-themes)
-
-También ha sido probado principalmente en Ubuntu, Fedora y Gentoo.
+Esta configuración está principalmente echa para la versión 28, y ha sido
+probada principalmente en Ubuntu, Fedora y Gentoo.
 
 * ¿Por qué utilizar esta configuración?
 
@@ -25,40 +16,85 @@ configuración? ¿Por qué ésta y no otra?
 
 Creo que esta es una buena configuración para una persona que viene
 aproximándose a Emacs. Primero porque no se atreve mucho a cambiar su
-funcionamiento normal, como es el caso de doomemacs o vimspace, las cuales ya
+funcionamiento normal, como es el caso de Doomemacs o Vimspace, las cuales ya
 son muy conocidas.
 
-En este sentido, tal como podemos observar con la lectura de la sección "Packages" son apenas algunos aquellos que se instalan:
+En este sentido, tal como podemos observar con la lectura de la sección
+"Packages" son apenas algunos aquellos que se instalan:
 
 - vertico
 - orderless
 - olivetti
 - consult
+- modus-themes
 
-Como se puede notar no se encuentra rellenado de muchos paquetes accesorios y
-creo que con esto cualquier usuario que quisiera conocer este programa al menos
-entraría a conocerlo de manera un poco más amigable.
+Como se puede notar, esta configuración no se encuentra rellenado de muchos
+paquetes accesorios y creo que con esto cualquier usuario que quisiera conocer
+este programa al menos entraría a conocerlo casi con sus funciones básicas pero
+de manera un poco más amigable.
 
 Cabe señalar que esto que se ve aquí consiste en la misma configuración del
 programa el cual se ejecutará al iniciar el programa.
 
-Por último, al iniciar por primera vez el programa aparecerá un aviso respecto
-del paquete olivetti, pero que a partir del segundo lanzamiento ya no saldrá
-más.
-
 * Instalación
 
-Para realizar la instalación se debiera copiar este repositorio dentro de la misma carpeta de Emacs para ejecutarlo al inicio del programa:
+Para realizar la instalación se debiera copiar este repositorio dentro de la
+misma carpeta de Emacs para ejecutarlo al inicio del programa:
 
 > git clone https://github.com/leandrusfanzec/emacs-leandrus.git
 
 > cd emacs-leandrus/
 
-> cp README.org ~/.emacs.d/
+> cp * ~/.emacs.d/
 
-> cp init.el ~/.emacs.d/
+He decidido pasar todo lo que se encuentra en la carpeta porque es más rápido y
+además contiene también el template de latex que será de gran ayuda para
+usuario.
+
+* Consejos para Uso
+
+Para el mejor uso de esta configuración recomendaría, como ya es conocido por
+cualquiera que use Emacs,iniciarlo como daemon y luego simplemente invocar los
+clientes. Lo que en línea de comanto es algo así dependiendo de la distribución:
+
+> emacs --daemon
+
+> emacsclient -c
+
+Esto puede variar, en general esa es la ídea.
+
+En segundo lugar, por algún motivo la compilación de olivetti aparecen algunos
+avisos en el buffer "Compile.log" los cuales no he podido resolver, pero que no
+son impedimento para el normal funcionamiento normal de esta configuración.
+Pero si les aparece, solamente será la primera vez (cuando se compile), pero no
+volverá a aparecer (al menos por ese motivo).
+
+Por último, siempre, siempre recurra al manual con "C-h i". Es una enorme
+fuente de información importante.
+
+* Template Latex
+
+Como se puede observar en la sección "Latex" he tomado la template que da como
+ejemplo Jake B en un vídeo que se cita más abajo. Para poder utilizar ese
+archivo de configuración como ahí se señala, se debe tener un archivo de setup
+que también está en este repositorio, que, es de completa autoría de Jake B
+pero lo dejo aquí para mayor facilidad al momento de utilizar estas
+herramientas.
+
+básicamente al inicio del archivo org se debe establecer lo siguiente:
+
+> #+SETUP: ~/.emacs.d/latex.setup
+
+Esto siguiendo las instrucciones de instalación señalados un poco más arriba,
+dado que la dirección tiene que apuntar específicamente a ese archivo, el cual
+puede ser modificado despues por el usuario.
 
 * Comportamiento General
+
+En esta primera etapa la configuración realiza pequeños ajustes para que la
+interfaz sea un poco más minimalista, elimina el aviso sonoro y visual, mejora
+el movimiento de scroll y agrega una función de "unfill" que personalmente me
+pareció muy útil.
 
 #+begin_src emacs-lisp
   (menu-bar-mode -1)
@@ -93,6 +129,10 @@ Para realizar la instalación se debiera copiar este repositorio dentro de la mi
 
 * Repositorios
 
+Aquí se configura los repositorios elpa y melpa, creo que con estos dos los
+usuarios podrás encontrar la mayoría de los paquetes que busquen, configurando
+a la vez "use-package" que es muy útil para configurar dichos paquetes.
+
 #+begin_src emacs-lisp
   (require 'package)
 
@@ -111,6 +151,9 @@ Para realizar la instalación se debiera copiar este repositorio dentro de la mi
 #+end_src
 
 * Packages
+
+En esta sección se instalan y configuran los paquetes que serán instalados a
+través de usa-packages.
 
 #+begin_src emacs-lisp
   ;; Enable vertico
@@ -170,38 +213,127 @@ Para realizar la instalación se debiera copiar este repositorio dentro de la mi
           completion-category-overrides '((file (styles partial-completion)))))
 
   ;; Distraction-free screen
+  ;; Por defecto inicia en los archivos org pero también con f9
   (use-package olivetti
     :hook (org-mode . olivetti-mode)
     :bind
     (("<f9>" . olivetti-mode)))
 
-  (use-package consult
-    :bind (("M-y"         . consult-yank-pop)
-           ("C-x C-SPC"   . consult-global-mark)
-           ("C-x M-:"     . consult-complex-command)
-           :map dired-mode-map
-           ("O" . consult-file-externally)
-           :map help-map
-           ("a" . consult-apropos)
-           :map minibuffer-local-map
-           ("M-r" . consult-history))
-    :custom
-    (completion-in-region-function #'consult-completion-in-region))
+  (use-package modus-themes)
 #+end_src
 
 * Theme
 
+Estas son algunas configuraciones respecto del paquete modus-theme que ya viene
+por defecto instalada en la versión 28 de Emacs, pero que he decidido dejarlo
+instalado por una de las variantes que solamente se encuentran actualmente en
+el paquete que se instala desde los repositorios configurados anteriormente.
+
+Esas configuraciones se encuentran en el mismo manual del paquete y que pueden
+ser accedidos a través de las teclas "C-h i", y está muy bien documentado por
+su creado Protesilaos (also knows as Prot).
+
 #+begin_src emacs-lisp
-  (load-theme 'modus-operandi t)            ; Light theme
+  ;; Customization
+  (setq modus-themes-italic-constructs t
+        modus-themes-bold-constructs t
+        modus-themes-no-mixed-fonts nil
+        modus-themes-subtle-line-numbers nil
+        modus-themes-success-deuteranopia t
+        modus-themes-tabs-accented t
+        modus-themes-inhibit-reload t ; only applies to `customize-set-variable' and related
+
+        modus-themes-fringes 'nil ; {nil,'subtle,'intense}
+
+        ;; Options for `modus-themes-lang-checkers' are either nil (the
+        ;; default), or a list of properties that may include any of those
+        ;; symbols: `straight-underline', `text-also', `background',
+        ;; `intense'
+        modus-themes-lang-checkers `(straight-underline text-also background intense)
+
+        ;; Options for `modus-themes-mode-line' are either nil, or a list
+        ;; that can combine any of `3d' OR `moody', `borderless',
+        ;; `accented', `padded'.
+        modus-themes-mode-line '(accented borderless)
+
+        ;; Options for `modus-themes-syntax' are either nil (the default),
+        ;; or a list of properties that may include any of those symbols:
+        ;; `faint', `yellow-comments', `green-strings', `alt-syntax'
+        modus-themes-syntax `(alt-syntax yellow-comments)
+
+        ;; Options for `modus-themes-hl-line' are either nil (the default),
+        ;; or a list of properties that may include any of those symbols:
+        ;; `accented', `underline', `intense'
+        modus-themes-hl-line '(underline accented)
+
+        ;; Options for `modus-themes-paren-match' are either nil (the
+        ;; default), or a list of properties that may include any of those
+        ;; symbols: `bold', `intense', `underline'
+        modus-themes-paren-match '(intense)
+
+        ;; Options for `modus-themes-links' are either nil (the default),
+        ;; or a list of properties that may include any of those symbols:
+        ;; `neutral-underline' OR `no-underline', `faint' OR `no-color',
+        ;; `bold', `italic', `background'
+        modus-themes-links '(background faint)
+
+        ;; Options for `modus-themes-prompts' are either nil (the
+        ;; default), or a list of properties that may include any of those
+        ;; symbols: `background', `bold', `gray', `intense', `italic'
+        modus-themes-prompts '(intense bold)
+
+        modus-themes-mail-citations nil ; {nil,'faint,'monochrome}
+
+        ;; Options for `modus-themes-region' are either nil (the default),
+        ;; or a list of properties that may include any of those symbols:
+        ;; `no-extend', `bg-only', `accented'
+        modus-themes-region '(bg-only no-extend)
+
+        ;; Options for `modus-themes-diffs': nil, 'desaturated,
+        ;; 'bg-only, 'deuteranopia, 'fg-only-deuteranopia
+        modus-themes-diffs 'fg-only-deuteranopia
+
+        modus-themes-org-blocks 'gray-background ; {nil,'gray-background,'tinted-background}
+
+        modus-themes-org-agenda ; this is an alist: read the manual or its doc string
+        '((header-block . (variable-pitch scale-title))
+          (header-date . (grayscale workaholic bold-today))
+          (event . (accented scale-small))
+          (scheduled . uniform)
+          (habit . traffic-light-deuteranopia))
+
+        modus-themes-headings ; this is an alist: read the manual or its doc string
+        '((1 . (overline background))
+          (2 . (rainbow overline))
+          (t . (no-bold)))
+
+        modus-themes-variable-pitch-ui nil
+        modus-themes-variable-pitch-headings t
+        modus-themes-scale-headings t
+        modus-themes-scale-1 1.1
+        modus-themes-scale-2 1.15
+        modus-themes-scale-3 1.21
+        modus-themes-scale-4 1.72
+        modus-themes-scale-title 1.33)
+
+  (load-theme 'modus-operandi-tinted t)            ; Light theme
 #+end_src
 
 * Dired
+
+Esto es un pequeño ajuste para que no aparezcan todos los archivos ocultos en
+Dired, haciéndolo un poco más simple.
 
 #+begin_src emacs-lisp
   (add-hook 'dired-mode-hook 'dired-hide-details-mode)
 #+end_src
 
 * Org
+
+Estas son algunas configuraciones para el uso general de los archivos en org.
+Como por ejemplo el spell-check, sangría, oculta los símbolos de formato de
+texto, abre las imágenes automáticamente al abrir los archivos, modifica el
+símbolo de folded de los headlines.
 
 #+begin_src emacs-lisp
   (add-hook 'org-mode-hook 'turn-on-flyspell)
@@ -215,6 +347,9 @@ Para realizar la instalación se debiera copiar este repositorio dentro de la mi
 #+end_src
 
 * Org-Agenda
+
+Estas son configuraciones para traducir el calendario y agenda que en algún
+momento los encontré por internet y me pareció perfecto.
 
 #+begin_src emacs-lisp
   ;; Calendar
@@ -251,7 +386,7 @@ Para realizar la instalación se debiera copiar este repositorio dentro de la mi
 * Latex
 
 Esto es algo tomado de Jake B por lo que recomiendo ver su vídeo que
-dejaré por algun lado [[https://jakebox.github.io/youtube/org_latex_video.html][aquí]].
+dejaré [[https://jakebox.github.io/youtube/org_latex_video.html][aquí]].
 
 #+begin_src emacs-lisp
   (with-eval-after-load 'ox-latex
@@ -270,17 +405,18 @@ dejaré por algun lado [[https://jakebox.github.io/youtube/org_latex_video.html]
 
 * Key Maps
 
-Por último, estableceremos los atajos de teclado para que alguna de las funciones más utilizadas estén "más a la mano" a la hora de trabajar.
+Por último, estableceremos los atajos de teclado para que alguna de las
+funciones más utilizadas estén "más a la mano" a la hora de trabajar.
 
 #+begin_src emacs-lisp
   ;; Org
   (global-set-key (kbd "C-c c") #'org-capture)
   (global-set-key (kbd "C-c a") #'org-agenda)
-  ;; Buffer
+  ;; Compara modificaciones en el buffer
   (global-set-key (kbd "C-x v =") #'diff-buffer-with-file)
   ;; Utilities
   (global-set-key (kbd "C-x c") 'calendar)
-  ;; Comportamiento
+  ;; Comportamiento imenu
   (global-set-key (kbd "M-i") 'imenu)
   ;; Unfill
   (define-key global-map "\M-Q" 'unfill-paragraph)
