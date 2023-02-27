@@ -5,22 +5,27 @@
 
 [[file:wellcome.png]]
 
-Esta es una configuración muy básica pero a la vez cómoda que puede ser de
-utilidad a los usuarios que deseen conocer por primera vez el poder Emacs.
+Esta es una configuración muy básica pero a la vez cómoda que la he probado con
+éxito en la versión 28 y 27 de Emacs, y en las distribuciones de Ubuntu, Fedora y
+Gentoo.
 
-Esta configuración está principalmente echa para la versión 28, y ha sido
-probada principalmente en Ubuntu, Fedora y Gentoo.
+En definitiva se trata de la configuración básica y minimalista que yo
+personalmente siempre he tratado de mantener, pero estimo sinceramente que,
+puede ser de utilidad a los usuarios que deseen conocer por primera vez el
+poder Emacs.
 
 * ¿Por qué utilizar esta configuración?
 
-Una de las primeras cosas que le pudiese aparecer al lector es la pregunta
+Una de las primeras dudas que pudiese aparecer al usuario es la pregunta
 respecto a ¿para qué utilizarla? ¿acaso el programa necesariamente necesita esa
-configuración? ¿Por qué ésta y no otra?
+configuración? y en definitiva: ¿Por qué ésta y no otra?
 
-Creo que esta es una buena configuración para una persona que viene
-aproximándose a Emacs. Primero porque no se atreve mucho a cambiar su
-funcionamiento normal, como es el caso de Doomemacs o Vimspace, las cuales ya
-son muy conocidas.
+En síntesis, creo que esta es una buena configuración para una persona que viene
+aproximándose a Emacs, principalmente en esta parte del mundo que se habla
+español.
+
+Primero porque no se atreve mucho a cambiar su funcionamiento normal, como es
+el caso de Doomemacs o Vimspace, las cuales ya son muy conocidas y también utilizadas masivamente pero que sobresaturan las funciones normales del programa.
 
 En este sentido, tal como podemos observar con la lectura de la sección
 "Packages" son apenas algunos aquellos que se instalan:
@@ -31,13 +36,15 @@ En este sentido, tal como podemos observar con la lectura de la sección
 - consult
 - modus-themes
 
-Como se puede notar, esta configuración no se encuentra rellenado de muchos
-paquetes accesorios y creo que con esto cualquier usuario que quisiera conocer
-este programa al menos entraría a conocerlo casi con sus funciones básicas pero
-de manera un poco más amigable.
+Como se puede notar, esta configuración no se encuentra rellenada paquetes
+accesorios y creo que con esto cualquier usuario que quisiera conocer
+este programa le facilitaría el proceso dado que no se distorsiona su idea
+principal. Por lo menos desde un punto de vista personal, fue lo que busqué al
+iniciarme en Emacs.
 
-Cabe señalar que esto que se ve aquí consiste en la misma configuración del
-programa el cual se ejecutará al iniciar el programa.
+Cabe señalar que, esto que se ve aquí consiste en la misma configuración del
+programa el cual se ejecutará al iniciar el programa. Es un archivo en formato
+org que invoca ordenes de elisp con la cual funciona el programa.
 
 * Instalación
 
@@ -50,31 +57,29 @@ misma carpeta de Emacs para ejecutarlo al inicio del programa:
 
 > cp * ~/.emacs.d/
 
-He decidido pasar todo lo que se encuentra en la carpeta porque es más rápido y
-además contiene también el template de latex que será de gran ayuda para
-usuario.
+He decidido hacerlo de esta manera porque es más rápido y además contiene
+también el template de latex que será de gran ayuda para usuario.
 
 * Consejos para Uso
 
 Para un mejor uso de esta configuración, recomendaría al usuario iniciar el
 programa Emacs como daemon y luego simplemente invocar los clientes. Lo que en
-línea de comando es algo así dependiendo de la distribución:
+línea de comando es algo así, dependiendo de la distribución:
 
 > emacs --daemon
 
 > emacsclient -c
 
+Esto puede variar, pero en general esta es la idea: daemon + client.
 Al hacer este último comando debiese aparecer nuestro primer buffer del programa:
 
 [[file:primerbuffer.png]]
-
-Esto puede variar, en general esa es la idea.
 
 En segundo lugar, por algún motivo la compilación de olivetti aparecen algunos
 avisos en el buffer "Compile.log" los cuales no he podido resolver, pero que no
 son impedimento para el normal funcionamiento normal de esta configuración.
 Pero si les aparece, solamente será la primera vez (cuando se compile), pero no
-volverá a aparecer (al menos por ese motivo).
+volverá a aparecer (al menos por ese motivo obviamente).
 
 Respecto del tema seleccionado, modus-operandi-tinted, se trata de una
 variación del paquete modus-theme que personalmente me gusta, sin embargo se
@@ -106,7 +111,9 @@ Esto siguiendo las instrucciones de instalación señalados un poco más arriba,
 dado que la dirección tiene que apuntar específicamente a ese archivo, el cual
 puede ser modificado despues por el usuario.
 
-Para hacerlo aun más didáctico este mismo archivo ya se encuentra con esa configuración y si quieres probar como funciona basta con presionar C-c e, y luego: l (Latex), o (generar archivo pdf y abrirlo).
+Para hacerlo aun más didáctico este mismo archivo ya se encuentra con esa configuración y si quieres probar como funciona basta con presionar C-c e, y luego: l (Latex), o (generar archivo pdf y abrirlo), dentro del archivo README.org copiado a la carpeta de Emacs.
+
+Lo puedes hacer abriendo Emacs, luego buscando el archivo con C-x C-f en el directorio ~/.emacs.d/README.org.
 
 [[file:convertir.png]]
 
