@@ -40,9 +40,13 @@ programa el cual se ejecutará al iniciar el programa.
 
 Para realizar la instalación se debiera copiar este repositorio dentro de la misma carpeta de Emacs para ejecutarlo al inicio del programa:
 
-> cd .emacs.d
-
 > git clone https://github.com/leandrusfanzec/emacs-leandrus.git
+
+> cd emacs-leandrus/
+
+> cp README.org ~/.emacs.d/
+
+> cp init.el ~/.emacs.d/
 
 Claramente el directorio de Emacs no debiese confundirse con el repositorio de
 git, por lo que seríá bueno que el usuario clonara el repositorio en cualquier
