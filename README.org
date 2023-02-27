@@ -261,7 +261,7 @@ el paquete que se instala desde los repositorios configurados anteriormente.
 
 Esas configuraciones se encuentran en el mismo manual del paquete y que pueden
 ser accedidos a través de las teclas "C-h i", y está muy bien documentado por
-su creado Protesilaos (also knows as Prot).
+su creado [[https://protesilaos.com/][Protesilaos]] (also knows as Prot).
 
 #+begin_src emacs-lisp
   ;; Customization
@@ -415,7 +415,7 @@ momento los encontré por internet y me pareció perfecto.
 
 * Latex
 
-Esto es algo tomado de Jake B por lo que recomiendo ver su vídeo que
+Esto es algo tomado de [[https://www.youtube.com/@JakeBox0][Jake B]] por lo que recomiendo ver su vídeo que
 dejaré [[https://jakebox.github.io/youtube/org_latex_video.html][aquí]].
 
 #+begin_src emacs-lisp
