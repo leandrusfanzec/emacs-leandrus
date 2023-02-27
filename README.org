@@ -31,14 +31,14 @@ modus-themes ya viene por defecto instalado.
 
 Como se puede notar no se encuentra rellenado de muchos paquetes accesorios y
 creo que con esto cualquier usuario que quisiera conocer este programa al menos
-entraria a conocerlo de manera un poco más amigable.
+entraría a conocerlo de manera un poco más amigable.
 
 Cabe señalar que esto que se ve aquí consiste en la misma configuración del
 programa el cual se ejecutará al iniciar el programa.
 
 * Instalación
 
-Para realizar la instalación se debiera copiar este repositorio dentro de la misma carpeta de emacs para ejecutarlo al inicio del programa:
+Para realizar la instalación se debiera copiar este repositorio dentro de la misma carpeta de Emacs para ejecutarlo al inicio del programa:
 
 > cd .emacs.d
 
@@ -46,8 +46,8 @@ Para realizar la instalación se debiera copiar este repositorio dentro de la mi
 
 Claramente el directorio de Emacs no debiese confundirse con el repositorio de
 git, por lo que seríá bueno que el usuario clonara el repositorio en cualquier
-otro directorioy luego de eso copiar estos archivos dentro de la carpeta
-".emacs.d".
+otro directorio y luego de eso copiar estos archivos dentro de la carpeta
+/".emacs.d"/.
 
 Con todo, para un usuario que quiera conocer el funcionamiento y tener así una
 primera aproximación creo que sería de gran ayuda.
