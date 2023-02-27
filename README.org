@@ -3,7 +3,19 @@
 #+startup: overview
 
 Esta es una configuración muy básica pero a la vez cómoda que puede ser de
-utilidad a los usuarios que deseen conocer mejor el poder Emacs.
+utilidad a los usuarios que deseen conocer por primera vez el poder Emacs.
+
+Esta configuración está principalmente echa para la versión 28. Creo que si se
+quiere probar con el tema modus-themes en una versión anterior a esa, se
+tendría que instalar dicho paquete y luego cargar ese tema, por lo que si lo
+prueban en una versión anterior a la 28, no encontrará el tema que está
+definido por defecto.
+
+Para estos efectos (y así usar el tema que se carga por defecto en esta configuración en una versión anterior a la 28), se tendría que agregar la siguiente línea en la sección "Packages":
+
+> (use-package modus-themes)
+
+También ha sido probado principalmente en Ubuntu, Fedora y Gentoo.
 
 * ¿Por qué utilizar esta configuración?
 
@@ -22,12 +34,6 @@ En este sentido, tal como podemos observar con la lectura de la sección "Packag
 - orderless
 - olivetti
 - consult
-- modus-themes
-
-El último paquete es un mero capricho respecto a una de las variantes de
-colores que personalmente me gusta (modus-operandi-tinted y su variación en
-dark, modus-vivendi-tinted), dado que ya en la versión 28 de Emacs el paquete
-modus-themes ya viene por defecto instalado.
 
 Como se puede notar no se encuentra rellenado de muchos paquetes accesorios y
 creo que con esto cualquier usuario que quisiera conocer este programa al menos
@@ -185,14 +191,12 @@ primera aproximación creo que sería de gran ayuda.
            ("M-r" . consult-history))
     :custom
     (completion-in-region-function #'consult-completion-in-region))
-
-  (use-package modus-themes)
 #+end_src
 
 * Theme
 
 #+begin_src emacs-lisp
-  (load-theme 'modus-operandi-tinted t)            ; Light theme
+  (load-theme 'modus-operandi t)            ; Light theme
 #+end_src
 
 * Dired
