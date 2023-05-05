@@ -1,21 +1,24 @@
 #+title: Emacs Config
 #+author: Leandrus Fanzec
 #+startup: overview
-#+bibliography: ~/Public/docs/bib/bib.bib
 #+SETUPFILE: ~/.emacs.d/latex.setup
 
---------
+* 🚀 Presentación
 
-Esta es una configuración muy básica pero a la vez cómoda que la he
-probado con éxito en la versión 28 y 27 de Emacs, y en las
-distribuciones de Ubuntu, Fedora y Gentoo.
+[[file:captura.png]]
 
-En definitiva se trata de la configuración básica y minimalista que yo
-personalmente siempre he tratado de mantener, pero estimo sinceramente
-que, puede ser de utilidad a los usuarios que deseen conocer por
-primera vez el poder Emacs.
+Esta es una configuración muy básica pero a la vez cómoda que he
+podido probar con éxito en la versión 28 y 27 de Emacs, y en las
+distribuciones de Ubuntu, Fedora y Gentoo. En realidad es una
+configuración muy mínima y simple por lo que no tendría por qué no
+funcionar en cualquier otra distribución.
 
-* ¿Por qué utilizar esta configuración?
+Como bien deslizaba en el párrafo anterior, se trata de la
+configuración básica y minimalista que personalmente he tratado de
+mantener, pero estimo sinceramente que, puede ser de utilidad a los
+usuarios que deseen conocer por primera vez la capacidad de Emacs.
+
+* 🤷 ¿Por qué utilizar esta configuración?
 
 Una de las primeras dudas que pudiese aparecer al usuario es la
 pregunta respecto a ¿para qué utilizarla? ¿acaso el programa
@@ -197,8 +200,9 @@ instalados a través de usa-packages.
           completion-category-defaults nil
           completion-category-overrides '((file (styles partial-completion)))))
 
-  (use-package pdf-tools)
-  (pdf-tools-install)
+  (use-package pdf-tools
+    :config
+    (pdf-tools-install))
 #+end_src
 
 * Dired
