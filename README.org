@@ -27,7 +27,8 @@ necesariamente necesita esa configuración? y en definitiva: ¿Por qué
 
 En síntesis, creo que esta es una buena configuración para una persona
 que viene aproximándose a Emacs, principalmente en esta parte del
-mundo que se habla español.
+mundo en la que se habla español y la búsqueda de información se hace
+difícil.
 
 Primero porque no se atreve mucho a cambiar su funcionamiento normal,
 como es el caso de Doomemacs o Vimspace, las cuales ya son muy
@@ -40,6 +41,7 @@ sección "Packages" son apenas algunos aquellos que se instalan:
 - vertico
 - orderless
 - consult
+- pdf-tools
 
 Como se puede notar, esta configuración no se encuentra rellenada
 paquetes accesorios y creo que con esto cualquier usuario que quisiera
@@ -52,7 +54,19 @@ configuración del programa el cual se ejecutará al iniciar el
 programa. Es un archivo en formato org que invoca ordenes de elisp con
 la cual funciona el programa.
 
-* Instalación
+** 👓 Una configuración minima para documentos
+
+Cabe señalar que esta configuración se enfoca en las necesidades de
+una persona no-programador, con eso me refiero a que con el paquete
+"pdf-tool", y la template de latex, satisfacen mas bien las
+necesidades de aquellos que generalmente utilizan documentos pdf.
+
+Con pdf-tools, tendremos un visualizador y editor de pdf dentro emacs,
+el cual tiene distintas configuraciones con las cuales el usuario
+puede echar mano. Sin embargo, con la configuración por defecto ya
+tendremos la posibilidad de resaltar y subrayar el texto. 
+
+* 💻 Instalación
 
 Para realizar la instalación se debiera copiar este repositorio dentro
 de la misma carpeta de Emacs para ejecutarlo al inicio del programa:
@@ -65,29 +79,33 @@ de la misma carpeta de Emacs para ejecutarlo al inicio del programa:
 
 _Aviso_: Lo que se está haciendo en el último comando es copiar los
 archivos del repositorio a la carpeta de configuraciones de
-Emacs. Esta carpeta solamente se crea cuando *se ha abierto alguna vez
-el programa* por lo que si nosotros simplemente instalamos Emacs y
-luego copiamos dichos documentos nos saldrá un error señalando que
-dicho destino (/la carpeta de configuracion ".emacs.d", no existe/).
+Emacs. Esta carpeta solamente se crea cuando *se haya abierto alguna
+vez el programa*, por lo que si nosotros simplemente instalamos Emacs
+y luego copiamos dichos documentos nos saldrá un error señalando que
+dicho destino (/la carpeta de configuracion ".emacs.d"/), no
+existe. Nada impide, por otro lado, que lo hagamos nosotros mismos con
+el comando /mkdir/ (en este caso sería: "mkdir $HOME/.emacs.d").
 
 He decidido hacerlo de esta manera porque es más rápido y además
 contiene también el template de latex que será de gran ayuda para
 usuario.
 
-* Consejos para Uso
+* 💡 Consejos para Uso
 
-Para un mejor uso de esta configuración, recomendaría al usuario
-iniciar el programa Emacs como daemon y luego simplemente invocar los
-clientes. Lo que en línea de comando es algo así, dependiendo de la
-distribución:
+Para un mejor en general, se recomienda iniciar el programa Emacs como
+daemon y luego simplemente invocar los clientes. Lo que en línea de
+comando es algo así, dependiendo de la distribución:
 
-> emacs --daemon
+- /ejemplo genérico:/
+
+> emacs -daemon
+
+y luego:
 
 > emacsclient -c
 
-Esto puede variar, pero en general esta es la idea: daemon + client.
-Al hacer este último comando debiese aparecer nuestro primer buffer
-del programa:
+Esto puede variar dependiendo del SO, pero en general esta es la idea:
+daemon + client.
 
 Por último, siempre, siempre recurra al manual con "C-h i". Es una
 enorme fuente de información importante.
