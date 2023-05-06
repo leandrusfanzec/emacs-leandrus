@@ -20,6 +20,8 @@ usuarios que deseen conocer por primera vez la capacidad de Emacs.
 
 * 🤷 ¿Por qué utilizar esta configuración?
 
+[[file:config.png]]
+
 Una de las primeras dudas que pudiese aparecer al usuario es la
 pregunta respecto a ¿para qué utilizarla? ¿acaso el programa
 necesariamente necesita esa configuración? y en definitiva: ¿Por qué
