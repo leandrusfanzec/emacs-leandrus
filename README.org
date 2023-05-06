@@ -7,7 +7,7 @@
 
 [[file:captura.png]]
 
-Esta es una configuración muy básica pero a la vez cómoda que he
+Esta es una configuración muy básica, pero a la vez cómoda que he
 podido probar con éxito en la versión 28 y 27 de Emacs, y en las
 distribuciones de Ubuntu, Fedora y Gentoo. En realidad es una
 configuración muy mínima y simple por lo que no tendría por qué no
@@ -25,48 +25,91 @@ pregunta respecto a ¿para qué utilizarla? ¿acaso el programa
 necesariamente necesita esa configuración? y en definitiva: ¿Por qué
 ésta y no otra?
 
-En síntesis, creo que esta es una buena configuración para una persona
-que viene aproximándose a Emacs, principalmente en esta parte del
-mundo en la que se habla español y la búsqueda de información se hace
-difícil.
+1. Creo que esta es una buena configuración para una persona que viene
+   aproximándose a Emacs, principalmente en esta parte del mundo en la
+   que se habla español y la búsqueda de información se hace difícil.
 
-Primero porque no se atreve mucho a cambiar su funcionamiento normal,
-como es el caso de Doomemacs o Vimspace, las cuales ya son muy
-conocidas y también utilizadas masivamente pero que sobresaturan las
-funciones normales del programa.
+2. En segundo lugar, porque no se atreve a cambiar su funcionamiento
+   normal, como es el caso de Doomemacs o Vimspace, las cuales ya son
+   muy conocidas y también utilizadas masivamente pero que
+   sobresaturan las funciones normales del programa.
 
-En este sentido, tal como podemos observar con la lectura de la
-sección "Packages" son apenas algunos aquellos que se instalan:
+3. En cambio esta configuración, tal como podemos observar de la
+   lectura de la sección [[Packages][Packages]], son apenas los siguientes:
 
-- vertico
-- orderless
-- consult
-- pdf-tools
+   + vertico
+   + orderless
+   + consult
+   + pdf-tools
 
-Como se puede notar, esta configuración no se encuentra rellenada
-paquetes accesorios y creo que con esto cualquier usuario que quisiera
-conocer este programa le facilitaría el proceso dado que no se
-distorsiona su idea principal. Por lo menos desde un punto de vista
-personal, fue lo que busqué al iniciarme en Emacs.
-
-Cabe señalar que, esto que se ve aquí consiste en la misma
-configuración del programa el cual se ejecutará al iniciar el
-programa. Es un archivo en formato org que invoca ordenes de elisp con
-la cual funciona el programa.
+4. Es una buena manera de aprender conocer el sistema tal como es,
+   porque de esta manera es más fácil de buscar información. Con esto
+   quiero decir que, la información siempre es más abundante con
+   programas estandarizados, por el mero hecho de que es más común.  
 
 ** 👓 Una configuración minima para documentos
 
-Cabe señalar que esta configuración se enfoca en las necesidades de
-una persona no-programador, con eso me refiero a que con el paquete
-"pdf-tool", y la template de latex, satisfacen mas bien las
-necesidades de aquellos que generalmente utilizan documentos pdf.
+Cabe señalar que, esta configuración se enfoca en las necesidades de
+una persona no-programador (que es mi caso), con eso me refiero a que
+con el paquete "pdf-tool", y la template de latex, satisfacen mas bien
+las necesidades de aquellos que generalmente utilizan documentos pdf.
 
 Con pdf-tools, tendremos un visualizador y editor de pdf dentro emacs,
 el cual tiene distintas configuraciones con las cuales el usuario
-puede echar mano. Sin embargo, con la configuración por defecto ya
-tendremos la posibilidad de resaltar y subrayar el texto. 
+puede echar mano. Sin embargo, con la configuración por defecto de
+este paquete ya tendremos la posibilidad de resaltar y subrayar el
+texto.
+
+** 📰 Template Latex
+
+Como se puede observar en la sección [[Latex][Latex]], he tomado la template que
+provee Jake B en un vídeo que se cita más abajo.
+
+Para poder utilizar ese archivo de configuración como ahí se señala,
+se debe tener un archivo de setup que también está en este
+repositorio, que, _es de completa autoría de Jake B_, yo solamente
+modifique algunas cosas para español conforme a mis necesidades.
+
+Dicho archivo debe ser invocado al inicio de un documento tipo org, de
+la siguiente manera:
+
+> #+SETUPFILE: ~/.emacs.d/latex.setup
+
+Se puede tomar de ejemplo este mismo documento de configuración, el
+cual ya viene con ese ajuste y que más adelante podremos ver como
+funciona.
+
+Se debe reparar que la ruta que ahí se indica es la de configuración
+de Emacs, a la cual, anteriormente se habían traspasado los archivos
+del repositorio, dentro de estos archivos iba también el que invoca
+ahora denominado "latex.setup".
+
+Para hacerlo aun más didáctico este mismo archivo ya se encuentra con
+esa configuración y si quieres probar cómo funciona basta con seguir
+los siguientes pasos:
+
+1) Abra Emacs (como se señala más arriba);
+2) Busque el archivo configuración README.org utilizando: C-x C-f y
+   buscando la siguiente ruta: ~/.emacs.d/README.org.
+3) Abra el archivo;
+4) Presione "C-c e", aparecerá un menu de exportación;
+5) Presione la tecla "l" (latex) y luego "o" (generar pdf y abrir;
+6) Puedes acompañar el proceso en los avisos que aparece en el
+   mini-buffer
+   
+*** ⚠ Dependencias
+
+Para el correcto funcionamiento de la función anteriormente descrita
+debemos tener instalados los siguientes paquetes:
+
+- Texlive
+- Texlive-Lua
+- Texlive-bibtex
 
 * 💻 Instalación
+
+
+
 
 Para realizar la instalación se debiera copiar este repositorio dentro
 de la misma carpeta de Emacs para ejecutarlo al inicio del programa:
@@ -86,11 +129,9 @@ dicho destino (/la carpeta de configuracion ".emacs.d"/), no
 existe. Nada impide, por otro lado, que lo hagamos nosotros mismos con
 el comando /mkdir/ (en este caso sería: "mkdir $HOME/.emacs.d").
 
-He decidido hacerlo de esta manera porque es más rápido y además
-contiene también el template de latex que será de gran ayuda para
-usuario.
-
 * 💡 Consejos para Uso
+
+** Daemon y Cliente
 
 Para un mejor en general, se recomienda iniciar el programa Emacs como
 daemon y luego simplemente invocar los clientes. Lo que en línea de
@@ -100,44 +141,42 @@ comando es algo así, dependiendo de la distribución:
 
 > emacs -daemon
 
-y luego:
+En este momento cargará la configuración, los repositorios y
+paquetes. Al final debiese aparecer un aviso diciendo que el demonio
+ha iniciado.
+
+Y luego:
 
 > emacsclient -c
 
 Esto puede variar dependiendo del SO, pero en general esta es la idea:
 daemon + client.
 
-Por último, siempre, siempre recurra al manual con "C-h i". Es una
-enorme fuente de información importante.
+** Manual de Referencia
 
-* Template Latex
+Se recomienda familiarizarse con los manuales de los paquetes y de
+Emacs mismo, para eso podemos utilizar el atajo: /"C-h i"/.
 
-Como se puede observar en la sección "Latex" he tomado la template que
-da como ejemplo Jake B en un vídeo que se cita más abajo. Para poder
-utilizar ese archivo de configuración como ahí se señala, se debe
-tener un archivo de setup que también está en este repositorio, que,
-es de completa autoría de Jake B pero lo dejo aquí para mayor
-facilidad al momento de utilizar estas herramientas.
+** Atajos de teclado
 
-básicamente al inicio del archivo org se debe establecer lo siguiente:
+En la [[Key Maps][última sección]] se definen algunos atajos, no son muchos y se
+recomienda su lectura.
 
-> #+SETUPFILE: ~/.emacs.d/latex.setup
+** Procesos en otro Buffer (Pdf-tools)
 
-Esto siguiendo las instrucciones de instalación señalados un poco más
-arriba, dado que la dirección tiene que apuntar específicamente a ese
-archivo, el cual puede ser modificado despues por el usuario.
+Durante la primera ejecución del programa es probable que el paquete
+pdf-tools mantenga procesos para su instalación en un buffer
+secundario (es decir, lo más probable es que el usuario no se dé
+cuenta).
 
-Para hacerlo aun más didáctico este mismo archivo ya se encuentra con
-esa configuración y si quieres probar como funciona basta con
-presionar C-c e, y luego: l (Latex), o (generar archivo pdf y
-abrirlo), dentro del archivo README.org copiado a la carpeta de Emacs.
+Se recomienda cambiar de buffer con "C-x b" al que se estará
+compilando el programa, el nombre del buffer tendrá ese mismo nombre:
+"compile...". Ya dentro de ese buffer podremos acompañar el proceso de
+instalación. Lo más probable es que se pida contraseña para la
+instalación de sus dependencias.
 
-Lo puedes hacer abriendo Emacs, luego buscando el archivo con C-x C-f
-en el directorio ~/.emacs.d/README.org.
-
-[[file:convertir.png]]
-
-Recuerde que latex debe estar instalado con sus paquetes extras.
+Una vez concluido, podremos probar el funcionamiento de pdf-tools,
+abriendo cualquier pdf dentro de Emacs.
 
 * Comportamiento General
 
@@ -159,7 +198,7 @@ visual, mejora el movimiento de scroll y agrega una función de
   (setq isearch-lax-whitespace t)
   (setq isearch-regexp-lax-whitespace nil)
   (setq initial-scratch-message "\n;; HOLA!\n\n\n")
-  (setq user-full-name "Leandrus Fanzec")
+  (setq user-full-name "NOMBREUSUARIO")
 
   ;; Unfill Function
   ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
@@ -173,7 +212,7 @@ visual, mejora el movimiento de scroll y agrega una función de
 
   (load-theme 'modus-operandi)            ; Light theme
 
-  ;; Monospaced typeface
+  ;; Monospaced typeface (En ubuntu utilizo esta fuente para los block codes)
   (set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 1.0)
 #+end_src
 
@@ -183,6 +222,8 @@ Aquí se configura los repositorios elpa y melpa, creo que con estos
 dos los usuarios podrás encontrar la mayoría de los paquetes que
 busquen, configurando a la vez "use-package" que es muy útil para
 configurar dichos paquetes.
+
+Esto es enteramente sacado de System Crafters y su saga EFS.
 
 #+begin_src emacs-lisp
   (require 'package)
@@ -235,9 +276,8 @@ ocultos en Dired, haciéndolo un poco más simple.
 * Org
 
 Estas son algunas configuraciones para el uso general de los archivos
-en org.  Como por ejemplo el spell-check, sangría, oculta los símbolos
-de formato de texto, abre las imágenes automáticamente al abrir los
-archivos, modifica el símbolo de folded de los headlines.
+en org.  Como por ejemplo el spell-check, sangría, modifica el símbolo
+de folded de los headlines.
 
 #+begin_src emacs-lisp
   (add-hook 'org-mode-hook 'turn-on-flyspell)
@@ -261,11 +301,11 @@ algún momento los encontré por internet y me pareció perfecto.
   (setq calendar-day-name-array ["domingo" "lunes" "martes" "miércoles" "jueves" "viernes" "sábado"])
   (setq calendar-month-abbrev-array ["Ene" "Feb" "Mar" "Abr" "May" "Jun" "Jul" "Ago" "Sep" "Oct" "Nov" "Dic"])
   (setq calendar-month-name-array ["enero" "febrero" "marzo" "abril" "mayo" "junio" "julio" "agosto" "septiembre" "octubre" "noviembre" "diciembre"])
+
   ;; Agenda
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
-
 
   ;; Resume clocking task when emacs is restarted
   (org-clock-persistence-insinuate)
@@ -323,5 +363,6 @@ trabajar.
   (global-set-key (kbd "M-i") 'imenu)
   ;; Unfill
   (define-key global-map "\M-Q" 'unfill-paragraph)
+  ;; Toggle theme 
   (define-key global-map (kbd "<f5>") 'modus-themes-toggle)
 #+end_src
