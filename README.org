@@ -42,25 +42,11 @@ necesariamente necesita esa configuración? y en definitiva: ¿Por qué
    + vertico
    + orderless
    + consult
-   + pdf-tools
 
 4. Es una buena manera de aprender conocer el sistema tal como es,
    porque de esta manera es más fácil de buscar información. Con esto
    quiero decir que, la información siempre es más abundante con
    programas estandarizados, por el mero hecho de que es más común.  
-
-** 👓 Una configuración minima para documentos
-
-Cabe señalar que, esta configuración se enfoca en las necesidades de
-una persona no-programador (que es mi caso), con eso me refiero a que
-con el paquete "pdf-tool", y la template de latex, satisfacen mas bien
-las necesidades de aquellos que generalmente utilizan documentos pdf.
-
-Con pdf-tools, tendremos un visualizador y editor de pdf dentro emacs,
-el cual tiene distintas configuraciones con las cuales el usuario
-puede echar mano. Sin embargo, con la configuración por defecto de
-este paquete ya tendremos la posibilidad de resaltar y subrayar el
-texto.
 
 ** 📰 Template Latex
 
@@ -97,21 +83,26 @@ los siguientes pasos:
 4) Presione "C-c e", aparecerá un menu de exportación;
 5) Presione la tecla "l" (latex) y luego "o" (generar pdf y abrir;
 6) Puedes acompañar el proceso en los avisos que aparece en el
-   mini-buffer
+   mini-buffer.
    
 *** ⚠ Dependencias
 
 Para el correcto funcionamiento de la función anteriormente descrita
 debemos tener instalados los siguientes paquetes:
 
-- Texlive
-- Texlive-Lua
-- Texlive-bibtex
+- Texlive ::
+- Texlive-Lua ::
+- Texlive-bibtex ::
+- Aspell-es ::
+
+Los tres primeros son paquetes de Latex, que nos permitirá hacer uso
+de las funciones de exportación a pdf.
+
+El último nos permitirá hacer uso de la función de spell checker (el
+cual, conforme a esta configuración deberá iniciar el modo "fly-spell"
+al abrir cualquier documento org.
 
 * 💻 Instalación
-
-
-
 
 Para realizar la instalación se debiera copiar este repositorio dentro
 de la misma carpeta de Emacs para ejecutarlo al inicio del programa:
@@ -129,10 +120,10 @@ vez el programa*, por lo que si nosotros simplemente instalamos Emacs
 y luego copiamos dichos documentos nos saldrá un error señalando que
 dicho destino (/la carpeta de configuracion ".emacs.d"/), no
 existe. Nada impide, por otro lado, que lo hagamos nosotros mismos con
-el comando /mkdir/ (en este caso sería: "mkdir $HOME/.emacs.d").
+el comando /mkdir/ (en tal caso, lo haríamos con: "mkdir
+$HOME/.emacs.d").
 
 * 💡 Consejos para Uso
-
 ** Daemon y Cliente
 
 Para un mejor en general, se recomienda iniciar el programa Emacs como
@@ -164,22 +155,6 @@ Emacs mismo, para eso podemos utilizar el atajo: /"C-h i"/.
 En la [[Key Maps][última sección]] se definen algunos atajos, no son muchos y se
 recomienda su lectura.
 
-** Procesos en otro Buffer (Pdf-tools)
-
-Durante la primera ejecución del programa es probable que el paquete
-pdf-tools mantenga procesos para su instalación en un buffer
-secundario (es decir, lo más probable es que el usuario no se dé
-cuenta).
-
-Se recomienda cambiar de buffer con "C-x b" al que se estará
-compilando el programa, el nombre del buffer tendrá ese mismo nombre:
-"compile...". Ya dentro de ese buffer podremos acompañar el proceso de
-instalación. Lo más probable es que se pida contraseña para la
-instalación de sus dependencias.
-
-Una vez concluido, podremos probar el funcionamiento de pdf-tools,
-abriendo cualquier pdf dentro de Emacs.
-
 * Comportamiento General
 
 En esta primera etapa la configuración realiza pequeños ajustes para
@@ -199,11 +174,12 @@ visual, mejora el movimiento de scroll y agrega una función de
   (setq search-whitespace-regexp ".*")
   (setq isearch-lax-whitespace t)
   (setq isearch-regexp-lax-whitespace nil)
-  (setq initial-scratch-message "\n;; HOLA!\n\n\n")
+  (setq initial-scratch-message "\n;; Gnu Emacs - Scratch Buffer\n\n\n")
+  ;; Puedes incluir el nombre usuario entre las colmillas:
   (setq user-full-name "NOMBREUSUARIO")
 
   ;; Unfill Function
-  ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+        ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
   (defun unfill-paragraph (&optional region)
     "Takes a multi-line paragraph and makes it into a single line of text."
     (interactive (progn (barf-if-buffer-read-only) '(t)))
@@ -211,8 +187,6 @@ visual, mejora el movimiento de scroll y agrega una función de
           ;; This would override `fill-column' if it's an integer.
           (emacs-lisp-docstring-fill-column t))
       (fill-paragraph nil region)))
-
-  (load-theme 'modus-operandi)            ; Light theme
 
   ;; Monospaced typeface (En ubuntu utilizo esta fuente para los block codes)
   (set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 1.0)
@@ -258,12 +232,8 @@ instalados a través de usa-packages.
   (use-package orderless
     :init
     (setq completion-styles '(orderless basic)
-          completion-category-defaults nil
-          completion-category-overrides '((file (styles partial-completion)))))
-
-  (use-package pdf-tools
-    :config
-    (pdf-tools-install))
+	  completion-category-defaults nil
+	  completion-category-overrides '((file (styles partial-completion)))))
 #+end_src
 
 * Dired
@@ -273,6 +243,93 @@ ocultos en Dired, haciéndolo un poco más simple.
 
 #+begin_src emacs-lisp
   (add-hook 'dired-mode-hook 'dired-hide-details-mode)
+#+end_src
+
+* Theme
+
+#+begin_src emacs-lisp
+  (setq modus-themes-italic-constructs t
+	modus-themes-bold-constructs nil
+	modus-themes-no-mixed-fonts nil
+	modus-themes-subtle-line-numbers nil
+	modus-themes-success-deuteranopia t
+	modus-themes-tabs-accented t
+	modus-themes-inhibit-reload t ; only applies to `customize-set-variable' and related
+
+	modus-themes-fringes 'nil ; {nil,'subtle,'intense}
+
+	;; Options for `modus-themes-lang-checkers' are either nil (the
+	;; default), or a list of properties that may include any of those
+	;; symbols: `straight-underline', `text-also', `background',
+	;; `intense'
+	modus-themes-lang-checkers '(intense text-also)
+
+	modus-themes-mode-line '(accented intense)
+
+	;; Options for `modus-themes-syntax' are either nil (the default),
+	;; or a list of properties that may include any of those symbols:
+	;; `faint', `yellow-comments', `green-strings', `alt-syntax'
+	modus-themes-syntax 'yellow-comments
+
+	;; Options for `modus-themes-hl-line' are either nil (the default),
+	;; or a list of properties that may include any of those symbols:
+	;; `accented', `underline', `intense'
+	modus-themes-hl-line '(underline accented)
+
+	;; Options for `modus-themes-paren-match' are either nil (the
+	;; default), or a list of properties that may include any of those
+	;; symbols: `bold', `intense', `underline'
+	modus-themes-paren-match '(bold intense)
+
+	;; Options for `modus-themes-links' are either nil (the default),
+	;; or a list of properties that may include any of those symbols:
+	;; `neutral-underline' OR `no-underline', `faint' OR `no-color',
+	;; `bold', `italic', `background'
+	modus-themes-links '(neutral-underline background)
+
+	;; Options for `modus-themes-prompts' are either nil (the
+	;; default), or a list of properties that may include any of those
+	;; symbols: `background', `bold', `gray', `intense', `italic'
+	modus-themes-prompts '(intense bold)
+
+	modus-themes-completions 'moderate ; {nil,'moderate,'opinionated}
+
+	modus-themes-mail-citations 'monochrome ; {nil,'faint,'monochrome}
+
+	;; Options for `modus-themes-region' are either nil (the default),
+	;; or a list of properties that may include any of those symbols:
+	;; `no-extend', `bg-only', `accented'
+	modus-themes-region '(bg-only no-extend)
+
+	;; Options for `modus-themes-diffs': nil, 'desaturated,
+	;; 'bg-only, 'deuteranopia, 'fg-only-deuteranopia
+	modus-themes-diffs 'fg-only-deuteranopia
+
+	modus-themes-org-blocks 'tinted-background ; {nil,'gray-background,'tinted-background}
+
+	modus-themes-org-agenda ; this is an alist: read the manual or its doc string
+	'((header-block . (variable-pitch scale-title))
+	  (header-date . (grayscale workaholic bold-today))
+	  (event . (accented scale-small))
+	  (scheduled . uniform)
+	  (habit . traffic-light-deuteranopia))
+
+	modus-themes-headings ; this is an alist: read the manual or its doc string
+	'((1 . (overline background))
+	  (2 . (rainbow overline))
+	  (t . (no-bold)))
+
+	modus-themes-variable-pitch-ui nil
+	modus-themes-variable-pitch-headings t
+	modus-themes-scale-headings t
+	modus-themes-scale-1 1.1
+	modus-themes-scale-2 1.15
+	modus-themes-scale-3 1.21
+	modus-themes-scale-4 1.27
+	modus-themes-scale-title 1.33)
+
+  ;; Load Theme
+  (load-theme 'modus-operandi t)            ; Light theme
 #+end_src
 
 * Org
@@ -285,9 +342,10 @@ de folded de los headlines.
   (add-hook 'org-mode-hook 'turn-on-flyspell)
   (setq org-startup-indented t
         org-pretty-entities t
+        org-adapt-indentation t
+        org-odd-levels-only t
         org-hide-leading-stars t
         org-image-actual-width '(300))
-  (setq org-ellipsis " ▼ ")
 #+end_src
 
 * Org-Agenda
@@ -308,6 +366,8 @@ algún momento los encontré por internet y me pareció perfecto.
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
+  ;; Files
+  (setq org-agenda-files '("~/Public/misc/agenda.org"))
 
   ;; Resume clocking task when emacs is restarted
   (org-clock-persistence-insinuate)
