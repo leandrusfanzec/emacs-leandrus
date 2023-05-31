@@ -9,7 +9,7 @@
 
 Esta es una configuración muy básica, pero a la vez cómoda que he
 podido probar con éxito en la versión 28 y 27 de Emacs, y en las
-distribuciones de Ubuntu, Fedora y Gentoo. En realidad es una
+distribuciones de Ubuntu, Fedora, Gentoo y Openbsd. En realidad es una
 configuración muy mínima y simple por lo que no tendría por qué no
 funcionar en cualquier otra distribución.
 
@@ -189,7 +189,7 @@ visual, mejora el movimiento de scroll y agrega una función de
       (fill-paragraph nil region)))
 
   ;; Monospaced typeface (En ubuntu utilizo esta fuente para los block codes)
-  (set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 1.0)
+  ;;(set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 1.0)
 #+end_src
 
 * Repositorios
