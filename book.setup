@@ -1,0 +1,56 @@
+#+LaTeX_CLASSL: \documentclass[twoside]{book}
+#+LaTeX_CLASS_OPTIONS: [amsbook]
+#+LaTeX_COMPILER: xelatex
+
+#+LATEX_HEADER: \usepackage{polyglossia}
+#+LATEX_HEADER: \setmainlanguage{spanish}
+#+LATEX_HEADER: \gappto\captionsspanish{\renewcommand{\tablename}{Tabla}} 
+
+% Quitar enumeración headlines al exportar
+#+LATEX_HEADER: \setcounter{secnumdepth}{0}
+
+% #+LATEX_HEADER: \usepackage[spanish,es-tabla]{babel} % Cargamos es-tabla para Tabla en lugar de Cuadro
+% #+LATEX_HEADER: \usepackage[utf8]{inputenc} % Codificación de entrada
+% #+LATEX_HEADER: \usepackage[T1]{fontenc} % Codificación de fuente
+% #+LATEX_HEADER: \usepackage{lmodern} % Fuente compatible
+
+
+#+LATEX_HEADER: \usepackage[citestyle=authoryear-icomp,bibstyle=authoryear,backend=biber,natbib=true]{biblatex}
+
+% Set Some configs fonts,table, etc.
+#+LATEX_HEADER: \usepackage{graphicx}
+#+LATEX_HEADER: \usepackage{amsmath, amsthm, amssymb}
+#+LATEX_HEADER: \usepackage[table, xcdraw]{xcolor}
+
+% Colorizing links in a nicer way.
+#+LATEX_HEADER: \definecolor{bblue}{HTML}{0645AD}
+#+LATEX_HEADER: \usepackage[colorlinks]{hyperref}
+#+LATEX_HEADER: \hypersetup{colorlinks, linkcolor=blue, urlcolor=bblue}
+
+% Moving up the title.
+#+LATEX_HEADER: \usepackage{titling}
+#+LATEX_HEADER: \setlength{\droptitle}{-6em}
+
+% Sangría
+#+LATEX_HEADER: \setlength{\parindent}{15pt}
+% Salto párrafo
+#+LATEX_HEADER: \setlength{\parskip}{0.8em}
+#+LATEX_HEADER: \usepackage[stretch=10]{microtype}
+#+LATEX_HEADER: \usepackage{hyphenat}
+#+LATEX_HEADER: \usepackage{ragged2e}
+#+LATEX_HEADER: \usepackage{subfig} % Subfigures (not needed in Org I think)
+#+LATEX_HEADER: \usepackage{hyperref} % Links
+#+LATEX_HEADER: \usepackage{listings} % Code highlighting
+
+% Disables flush alighment on the right side. Personal preference.
+# #+LATEX_HEADER: \RaggedRight
+
+% Page geometry
+#+LATEX_HEADER: \usepackage[paperheight=8.5in, paperwidth=5.5in, heightrounded, margin=0.8in]{geometry}
+
+% Line spacing
+#+LATEX_HEADER: \renewcommand{\baselinestretch}{.90}
+
+
+
+
