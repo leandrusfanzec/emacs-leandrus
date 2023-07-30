@@ -165,21 +165,16 @@ visual, mejora el movimiento de scroll y agrega una función de
 #+begin_src emacs-lisp
   (menu-bar-mode -1)
   (tool-bar-mode -1)
-  (setq inhibit-splash-screen t)
+  ;;(setq inhibit-splash-screen t)
   (scroll-bar-mode -1)
   (blink-cursor-mode -1)
   ;; Easy-Kill de buffer whitout modifications
   (global-set-key [(control x) (k)] 'kill-this-buffer)
-  ;; Mejora la búsqueda (simplifica)
-  (setq search-whitespace-regexp ".*")
-  (setq isearch-lax-whitespace t)
-  (setq isearch-regexp-lax-whitespace nil)
-  (setq initial-scratch-message "\n;; Gnu Emacs - Scratch Buffer\n\n\n")
   ;; Puedes incluir el nombre usuario entre las colmillas:
-  (setq user-full-name "NOMBREUSUARIO")
+  (setq user-full-name "Lucas Fernandez")
 
   ;; Unfill Function
-        ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+                ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
   (defun unfill-paragraph (&optional region)
     "Takes a multi-line paragraph and makes it into a single line of text."
     (interactive (progn (barf-if-buffer-read-only) '(t)))
@@ -189,7 +184,21 @@ visual, mejora el movimiento de scroll y agrega una función de
       (fill-paragraph nil region)))
 
   ;; Monospaced typeface (En ubuntu utilizo esta fuente para los block codes)
-  ;;(set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 1.0)
+  (set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 1.0)
+
+  (require 'company)
+  (add-hook 'after-init-hook 'global-company-mode)
+
+  (require 'flycheck)
+  (add-hook 'after-init-hook #'global-flycheck-mode)
+
+  (defun my-show-org-agenda-on-connect ()
+    "Mostrar org-agenda cuando el cliente de Emacs se conecta al servidor."
+    (when (equal (buffer-name) "*scratch*") ; Solo se ejecuta en el buffer *scratch*
+      (org-agenda-list)
+      (delete-other-windows)))
+
+  (add-hook 'server-after-make-frame-hook 'my-show-org-agenda-on-connect)
 #+end_src
 
 * Repositorios
@@ -229,12 +238,15 @@ instalados a través de usa-packages.
     :init
     (vertico-mode))
 
+  (use-package tex
+    :ensure auctex)
+
   (use-package orderless
     :init
     (setq completion-styles '(orderless basic)
-	  completion-category-defaults nil
-	  completion-category-overrides '((file (styles partial-completion)))))
-#+end_src
+          completion-category-defaults nil
+          completion-category-overrides '((file (styles partial-completion)))))
+    #+end_src
 
 * Dired
 
@@ -249,90 +261,92 @@ ocultos en Dired, haciéndolo un poco más simple.
 
 #+begin_src emacs-lisp
   (setq modus-themes-italic-constructs t
-	modus-themes-bold-constructs nil
-	modus-themes-no-mixed-fonts nil
-	modus-themes-subtle-line-numbers nil
-	modus-themes-success-deuteranopia t
-	modus-themes-tabs-accented t
-	modus-themes-inhibit-reload t ; only applies to `customize-set-variable' and related
+        modus-themes-bold-constructs nil
+        modus-themes-no-mixed-fonts nil
+        modus-themes-subtle-line-numbers nil
+        modus-themes-success-deuteranopia t
+        modus-themes-tabs-accented t
+        modus-themes-inhibit-reload t ; only applies to `customize-set-variable' and related
 
-	modus-themes-fringes 'nil ; {nil,'subtle,'intense}
+        modus-themes-fringes 'nil ; {nil,'subtle,'intense}
 
-	;; Options for `modus-themes-lang-checkers' are either nil (the
-	;; default), or a list of properties that may include any of those
-	;; symbols: `straight-underline', `text-also', `background',
-	;; `intense'
-	modus-themes-lang-checkers '(intense text-also)
+        ;; Options for `modus-themes-lang-checkers' are either nil (the
+        ;; default), or a list of properties that may include any of those
+        ;; symbols: `straight-underline', `text-also', `background',
+        ;; `intense'
+        modus-themes-lang-checkers '(intense text-also)
 
-	modus-themes-mode-line '(accented intense)
+        modus-themes-mode-line '(accented intense)
 
-	;; Options for `modus-themes-syntax' are either nil (the default),
-	;; or a list of properties that may include any of those symbols:
-	;; `faint', `yellow-comments', `green-strings', `alt-syntax'
-	modus-themes-syntax 'yellow-comments
+        ;; Options for `modus-themes-syntax' are either nil (the default),
+        ;; or a list of properties that may include any of those symbols:
+        ;; `faint', `yellow-comments', `green-strings', `alt-syntax'
+        modus-themes-syntax 'yellow-comments
 
-	;; Options for `modus-themes-hl-line' are either nil (the default),
-	;; or a list of properties that may include any of those symbols:
-	;; `accented', `underline', `intense'
-	modus-themes-hl-line '(underline accented)
+        ;; Options for `modus-themes-hl-line' are either nil (the default),
+        ;; or a list of properties that may include any of those symbols:
+        ;; `accented', `underline', `intense'
+        modus-themes-hl-line '(underline accented)
 
-	;; Options for `modus-themes-paren-match' are either nil (the
-	;; default), or a list of properties that may include any of those
-	;; symbols: `bold', `intense', `underline'
-	modus-themes-paren-match '(bold intense)
+        ;; Options for `modus-themes-paren-match' are either nil (the
+        ;; default), or a list of properties that may include any of those
+        ;; symbols: `bold', `intense', `underline'
+        modus-themes-paren-match '(bold intense)
 
-	;; Options for `modus-themes-links' are either nil (the default),
-	;; or a list of properties that may include any of those symbols:
-	;; `neutral-underline' OR `no-underline', `faint' OR `no-color',
-	;; `bold', `italic', `background'
-	modus-themes-links '(neutral-underline background)
+        ;; Options for `modus-themes-links' are either nil (the default),
+        ;; or a list of properties that may include any of those symbols:
+        ;; `neutral-underline' OR `no-underline', `faint' OR `no-color',
+        ;; `bold', `italic', `background'
+        modus-themes-links '(neutral-underline background)
 
-	;; Options for `modus-themes-prompts' are either nil (the
-	;; default), or a list of properties that may include any of those
-	;; symbols: `background', `bold', `gray', `intense', `italic'
-	modus-themes-prompts '(intense bold)
+        ;; Options for `modus-themes-prompts' are either nil (the
+        ;; default), or a list of properties that may include any of those
+        ;; symbols: `background', `bold', `gray', `intense', `italic'
+        modus-themes-prompts '(intense bold)
 
-	modus-themes-completions 'moderate ; {nil,'moderate,'opinionated}
+        modus-themes-completions 'moderate ; {nil,'moderate,'opinionated}
 
-	modus-themes-mail-citations 'monochrome ; {nil,'faint,'monochrome}
+        modus-themes-mail-citations 'monochrome ; {nil,'faint,'monochrome}
 
-	;; Options for `modus-themes-region' are either nil (the default),
-	;; or a list of properties that may include any of those symbols:
-	;; `no-extend', `bg-only', `accented'
-	modus-themes-region '(bg-only no-extend)
+        ;; Options for `modus-themes-region' are either nil (the default),
+        ;; or a list of properties that may include any of those symbols:
+        ;; `no-extend', `bg-only', `accented'
+        modus-themes-region '(bg-only no-extend)
 
-	;; Options for `modus-themes-diffs': nil, 'desaturated,
-	;; 'bg-only, 'deuteranopia, 'fg-only-deuteranopia
-	modus-themes-diffs 'fg-only-deuteranopia
+        ;; Options for `modus-themes-diffs': nil, 'desaturated,
+        ;; 'bg-only, 'deuteranopia, 'fg-only-deuteranopia
+        modus-themes-diffs 'fg-only-deuteranopia
 
-	modus-themes-org-blocks 'tinted-background ; {nil,'gray-background,'tinted-background}
+        modus-themes-org-blocks 'tinted-background ; {nil,'gray-background,'tinted-background}
 
-	modus-themes-org-agenda ; this is an alist: read the manual or its doc string
-	'((header-block . (variable-pitch scale-title))
-	  (header-date . (grayscale workaholic bold-today))
-	  (event . (accented scale-small))
-	  (scheduled . uniform)
-	  (habit . traffic-light-deuteranopia))
+        modus-themes-org-agenda ; this is an alist: read the manual or its doc string
+        '((header-block . (variable-pitch scale-title))
+          (header-date . (grayscale workaholic bold-today))
+          (event . (accented scale-small))
+          (scheduled . uniform)
+          (habit . traffic-light-deuteranopia))
 
-	modus-themes-headings ; this is an alist: read the manual or its doc string
-	'((1 . (overline background))
-	  (2 . (rainbow overline))
-	  (t . (no-bold)))
+        modus-themes-headings ; this is an alist: read the manual or its doc string
+        '((1 . (overline background))
+          (2 . (rainbow overline))
+          (t . (no-bold)))
 
-	modus-themes-variable-pitch-ui nil
-	modus-themes-variable-pitch-headings t
-	modus-themes-scale-headings t
-	modus-themes-scale-1 1.1
-	modus-themes-scale-2 1.15
-	modus-themes-scale-3 1.21
-	modus-themes-scale-4 1.27
-	modus-themes-scale-title 1.33)
+        modus-themes-variable-pitch-ui nil
+        modus-themes-variable-pitch-headings t
+        modus-themes-scale-headings t
+        modus-themes-scale-1 1.1
+        modus-themes-scale-2 1.15
+        modus-themes-scale-3 1.21
+        modus-themes-scale-4 1.27
+        modus-themes-scale-title 1.33)
 
   ;; Load Theme
   (load-theme 'modus-operandi t)            ; Light theme
 #+end_src
 
 * Org
+:LOGBOOK:
+:END:
 
 Estas son algunas configuraciones para el uso general de los archivos
 en org.  Como por ejemplo el spell-check, sangría, modifica el símbolo
@@ -346,6 +360,46 @@ de folded de los headlines.
         org-odd-levels-only t
         org-hide-leading-stars t
         org-image-actual-width '(300))
+
+  (setq org-todo-keywords
+        '((sequence "TODO" "EN CURSO" "ESPERANDO" "|" "DONE" "CANCELADO" "POSTERGADO")))
+
+  (setq org-agenda-columns-add-appointments-to-effort-sum t)
+  (setq org-agenda-columns-add-appointments-to-effort-sum "Eff")
+  (setq org-agenda-columns-compute-summary-properties "Effort(Effort)")
+
+  ;; Files
+  (setq org-agenda-files '("~/Public/docs/notes/"))
+
+
+  ;; Configurar directorio de notas
+  (setq org-directory "~/Public/docs/files/nots")
+
+  ;; Configurar agenda personalizada
+  (setq org-agenda-custom-commands
+        '(("c" "Agenda y tareas pendientes"
+           ((agenda "")
+            (todo "TODO")))
+          ("n" "Notas" tags "NOTE")
+          ))
+  ;; Definir la etiqueta para notas
+  (setq org-tag-alist '(("NOTE" . ?n)
+                        ("IMPORTANTE" . ?i)
+                        ("TRABAJO" . ?t)))
+
+
+  ;; Configurar Org Captures
+  (define-key global-map (kbd "C-c c") 'org-capture)
+  (setq org-capture-templates
+        '(("t" "Tarea" entry (file+headline "~/Public/docs/notes/tareas.org" "Tareas pendientes")
+           "* TODO %?\n %i\n %a")
+          ("n" "Nota" entry (file+headline "~/Public/docs/notes/notas.org" "Notas")
+           "* %? :NOTE:\n %i\n %a\n"
+           :prepend t
+           :empty-lines 1
+           :prepend-value (concat (format-time-string "[%Y-%m-%d %H:%M]") "\n") 
+           )))
+
 #+end_src
 
 * Org-Agenda
@@ -366,8 +420,6 @@ algún momento los encontré por internet y me pareció perfecto.
   (setq org-agenda-start-with-log-mode t)
   (setq org-log-done 'time)
   (setq org-log-into-drawer t)
-  ;; Files
-  (setq org-agenda-files '("~/Public/misc/agenda.org"))
 
   ;; Resume clocking task when emacs is restarted
   (org-clock-persistence-insinuate)
@@ -385,6 +437,10 @@ algún momento los encontré por internet y me pareció perfecto.
   (setq org-clock-report-include-clocking-task t)
 
   (setq org-return-follows-link t)
+
+  (setq org-agenda-time-grid '((daily today require-timed remove-match)
+                               (800 1000 1200 1400 1600 1800)
+                               "......" "----------------"))
 #+end_src
 
 * Latex
@@ -397,14 +453,46 @@ dejaré [[https://jakebox.github.io/youtube/org_latex_video.html][aquí]].
     (add-to-list 'org-latex-classes
                  '("org-plain-latex"
                    "\\documentclass{article}
-             [NO-DEFAULT-PACKAGES]
-             [PACKAGES]
-             [EXTRA]"
+                               [NO-DEFAULT-PACKAGES]
+                               [PACKAGES]
+                               [EXTRA]"
                    ("\\section{%s}" . "\\section*{%s}")
                    ("\\subsection{%s}" . "\\subsection*{%s}")
                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
                    ("\\paragraph{%s}" . "\\paragraph*{%s}")
                    ("\\subparagraph{%s}" . "\\subparagraph*{%s}"))))
+
+  ;; Cargar AUCTeX
+  (use-package tex
+    :ensure auctex)
+
+  ;; Configuración adicional para AUCTeX
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+  (setq TeX-PDF-mode t) ; Usar el modo PDF por defecto
+
+  ;; Activa el modo de AUCTeX en archivos .tex
+  (add-hook 'LaTeX-mode-hook 'TeX-source-correlate-mode)
+  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+
+  ;; Configuración para sincronización con Evince y SyncTeX
+  (setq TeX-source-correlate-start-server t)
+  (setq TeX-source-correlate-mode t)
+  (setq TeX-view-program-selection '((output-pdf "Evince")))
+  (setq TeX-source-correlate-method 'synctex) ; Opción para utilizar SyncTeX
+
+  ;; Configuración para utilizar minted con AUCTeX
+  (setq LaTeX-command "latex -shell-escape")
+
+  ;; Activa el relleno automático de paréntesis
+  (electric-pair-mode 1)
+
+  ;; Activa el resaltado de paréntesis correspondientes
+  (show-paren-mode 1)
+
 #+end_src
 
 * Key Maps
@@ -428,3 +516,4 @@ trabajar.
   ;; Toggle theme 
   (define-key global-map (kbd "<f5>") 'modus-themes-toggle)
 #+end_src
+
