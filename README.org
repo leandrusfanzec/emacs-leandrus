@@ -7,25 +7,15 @@
 
 [[file:captura.png]]
 
-Esta es una configuración muy básica, pero a la vez cómoda que he
-podido probar con éxito en la versión 28 y 27 de Emacs, y en las
-distribuciones de Ubuntu, Fedora, Gentoo y Openbsd. En realidad es una
-configuración muy mínima y simple por lo que no tendría por qué no
-funcionar en cualquier otra distribución.
+Esta es una configuración muy básica, pero a la vez cómoda que he podido probar con éxito en la versión 28 y 27 de Emacs, y en las distribuciones de Ubuntu, Fedora, Gentoo y Openbsd. En realidad es una configuración muy mínima y simple por lo que no tendría por qué no funcionar en cualquier otra distribución.
 
-Como bien deslizaba en el párrafo anterior, se trata de la
-configuración básica y minimalista que personalmente he tratado de
-mantener, pero estimo sinceramente que, puede ser de utilidad a los
-usuarios que deseen conocer por primera vez la capacidad de Emacs.
+Como bien deslizaba en el párrafo anterior, se trata de la configuración básica y minimalista que personalmente he tratado de mantener, pero estimo sinceramente que, puede ser de utilidad a los usuarios que deseen conocer por primera vez la capacidad de Emacs.
 
 * 🤷 ¿Por qué utilizar esta configuración?
 
 [[file:config.png]]
 
-Una de las primeras dudas que pudiese aparecer al usuario es la
-pregunta respecto a ¿para qué utilizarla? ¿acaso el programa
-necesariamente necesita esa configuración? y en definitiva: ¿Por qué
-ésta y no otra?
+Una de las primeras dudas que pudiese aparecer al usuario es la pregunta respecto a ¿para qué utilizarla? ¿acaso el programa necesariamente necesita esa configuración? y en definitiva: ¿Por qué ésta y no otra?
 
 1. Creo que esta es una buena configuración para una persona que viene
    aproximándose a Emacs, principalmente en esta parte del mundo en la
@@ -46,35 +36,23 @@ necesariamente necesita esa configuración? y en definitiva: ¿Por qué
 4. Es una buena manera de aprender conocer el sistema tal como es,
    porque de esta manera es más fácil de buscar información. Con esto
    quiero decir que, la información siempre es más abundante con
-   programas estandarizados, por el mero hecho de que es más común.  
+   programas estandarizados, por el mero hecho de que es más común.
 
 ** 📰 Template Latex
 
-Como se puede observar en la sección [[Latex][Latex]], he tomado la template que
-provee Jake B en un vídeo que se cita más abajo.
+Como se puede observar en la sección [[Latex][Latex]], he tomado la template que provee Jake B en un vídeo que se cita más abajo.
 
-Para poder utilizar ese archivo de configuración como ahí se señala,
-se debe tener un archivo de setup que también está en este
-repositorio, que, _es de completa autoría de Jake B_, yo solamente
-modifique algunas cosas para español conforme a mis necesidades.
+Para poder utilizar ese archivo de configuración como ahí se señala, se debe tener un archivo de setup que también está en este repositorio, que, _es de completa autoría de Jake B_, yo solamente modifique algunas cosas para español conforme a mis necesidades.
 
-Dicho archivo debe ser invocado al inicio de un documento tipo org, de
-la siguiente manera:
+Dicho archivo debe ser invocado al inicio de un documento tipo org, de la siguiente manera:
 
-> #+SETUPFILE: ~/.emacs.d/latex.setup
+: #+SETUPFILE: ~/.emacs.d/latex.setup
 
-Se puede tomar de ejemplo este mismo documento de configuración, el
-cual ya viene con ese ajuste y que más adelante podremos ver como
-funciona.
+Se puede tomar de ejemplo este mismo documento de configuración, el cual ya viene con ese ajuste y que más adelante podremos ver como funciona.
 
-Se debe reparar que la ruta que ahí se indica es la de configuración
-de Emacs, a la cual, anteriormente se habían traspasado los archivos
-del repositorio, dentro de estos archivos iba también el que invoca
-ahora denominado "latex.setup".
+Se debe reparar que la ruta que ahí se indica es la de configuración de Emacs, a la cual, anteriormente se habían traspasado los archivos del repositorio, dentro de estos archivos iba también el que invoca ahora denominado "latex.setup".
 
-Para hacerlo aun más didáctico este mismo archivo ya se encuentra con
-esa configuración y si quieres probar cómo funciona basta con seguir
-los siguientes pasos:
+Para hacerlo aun más didáctico este mismo archivo ya se encuentra con esa configuración y si quieres probar cómo funciona basta con seguir los siguientes pasos:
 
 1) Abra Emacs (como se señala más arriba);
 2) Busque el archivo configuración README.org utilizando: C-x C-f y
@@ -104,68 +82,49 @@ al abrir cualquier documento org.
 
 * 💻 Instalación
 
-Para realizar la instalación se debiera copiar este repositorio dentro
-de la misma carpeta de Emacs para ejecutarlo al inicio del programa:
+Para realizar la instalación se debiera copiar este repositorio dentro de la misma carpeta de Emacs para ejecutarlo al inicio del programa:
 
-> git clone https://github.com/leandrusfanzec/emacs-leandrus.git
+: git clone https://github.com/leandrusfanzec/emacs-leandrus.git
 
-> cd emacs-leandrus/
+: cd emacs-leandrus/
 
-> cp * ~/.emacs.d/
+: cp * ~/.emacs.d/
 
-_Aviso_: Lo que se está haciendo en el último comando es copiar los
-archivos del repositorio a la carpeta de configuraciones de
-Emacs. Esta carpeta solamente se crea cuando *se haya abierto alguna
-vez el programa*, por lo que si nosotros simplemente instalamos Emacs
-y luego copiamos dichos documentos nos saldrá un error señalando que
-dicho destino (/la carpeta de configuracion ".emacs.d"/), no
-existe. Nada impide, por otro lado, que lo hagamos nosotros mismos con
-el comando /mkdir/ (en tal caso, lo haríamos con: "mkdir
-$HOME/.emacs.d").
+_Aviso_: Lo que se está haciendo en el último comando es copiar los archivos del repositorio a la carpeta de configuraciones de Emacs. Esta carpeta solamente se crea cuando *se haya abierto alguna vez el programa*, por lo que si nosotros simplemente instalamos Emacs y luego copiamos dichos documentos nos saldrá un error señalando que dicho destino (/la carpeta de configuracion ".emacs.d"/), no existe. Nada impide, por otro lado, que lo hagamos nosotros mismos con el comando /mkdir/ (en tal caso, lo haríamos con: "mkdir $HOME/.emacs.d").
 
 * 💡 Consejos para Uso
 ** Daemon y Cliente
 
-Para un mejor en general, se recomienda iniciar el programa Emacs como
-daemon y luego simplemente invocar los clientes. Lo que en línea de
-comando es algo así, dependiendo de la distribución:
+Para un mejor en general, se recomienda iniciar el programa Emacs como daemon y luego simplemente invocar los clientes. Lo que en línea de comando es algo así, dependiendo de la distribución:
 
 - /ejemplo genérico:/
 
-> emacs -daemon
+: emacs -daemon
 
-En este momento cargará la configuración, los repositorios y
-paquetes. Al final debiese aparecer un aviso diciendo que el demonio
-ha iniciado.
+En este momento cargará la configuración, los repositorios y paquetes. Al final debiese aparecer un aviso diciendo que el demonio ha iniciado.
 
 Y luego:
 
-> emacsclient -c
+: emacsclient -c
 
-Esto puede variar dependiendo del SO, pero en general esta es la idea:
-daemon + client.
+Esto puede variar dependiendo del SO, pero en general esta es la idea: daemon + client.
 
 ** Manual de Referencia
 
-Se recomienda familiarizarse con los manuales de los paquetes y de
-Emacs mismo, para eso podemos utilizar el atajo: /"C-h i"/.
+Se recomienda familiarizarse con los manuales de los paquetes y de Emacs mismo, para eso podemos utilizar el atajo: /"C-h i"/.
 
 ** Atajos de teclado
 
-En la [[Key Maps][última sección]] se definen algunos atajos, no son muchos y se
-recomienda su lectura.
+En la [[Key Maps][última sección]] se definen algunos atajos, no son muchos y se recomienda su lectura.
 
 * Comportamiento General
 
-En esta primera etapa la configuración realiza pequeños ajustes para
-que la interfaz sea un poco más minimalista, elimina el aviso sonoro y
-visual, mejora el movimiento de scroll y agrega una función de
-"unfill" que personalmente me pareció muy útil.
+En esta primera etapa la configuración realiza pequeños ajustes para que la interfaz sea un poco más minimalista, elimina el aviso sonoro y visual, mejora el movimiento de scroll y agrega una función de "unfill" que personalmente me pareció muy útil.
 
 #+begin_src emacs-lisp
   (menu-bar-mode -1)
   (tool-bar-mode -1)
-  ;;(setq inhibit-splash-screen t)
+  (setq inhibit-splash-screen t)
   (scroll-bar-mode -1)
   (blink-cursor-mode -1)
   ;; Easy-Kill de buffer whitout modifications
@@ -174,7 +133,7 @@ visual, mejora el movimiento de scroll y agrega una función de
   (setq user-full-name "Lucas Fernandez")
 
   ;; Unfill Function
-                ;;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
+  ;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
   (defun unfill-paragraph (&optional region)
     "Takes a multi-line paragraph and makes it into a single line of text."
     (interactive (progn (barf-if-buffer-read-only) '(t)))
@@ -183,30 +142,102 @@ visual, mejora el movimiento de scroll y agrega una función de
           (emacs-lisp-docstring-fill-column t))
       (fill-paragraph nil region)))
 
-  ;; Monospaced typeface (En ubuntu utilizo esta fuente para los block codes)
-  (set-face-attribute 'fixed-pitch nil :family "Ubuntu Mono" :height 1.0)
+  ;; Add frame borders and window dividers
+  (modify-all-frames-parameters
+   '((right-divider-width . 30)
+     (internal-border-width . 30)))
 
-  (require 'company)
-  (add-hook 'after-init-hook 'global-company-mode)
+  (setq
+   ;; Edit settings
+   org-auto-align-tags nil
+   org-tags-column 0
+   org-catch-invisible-edits 'show-and-error
+   org-special-ctrl-a/e t
+   org-insert-heading-respect-content t
 
-  (require 'flycheck)
-  (add-hook 'after-init-hook #'global-flycheck-mode)
+   ;; Org styling, hide markup etc.
+   org-hide-emphasis-markers t
+   org-pretty-entities t
+   org-ellipsis "…"
 
-  (defun my-show-org-agenda-on-connect ()
-    "Mostrar org-agenda cuando el cliente de Emacs se conecta al servidor."
-    (when (equal (buffer-name) "*scratch*") ; Solo se ejecuta en el buffer *scratch*
-      (org-agenda-list)
-      (delete-other-windows)))
+   ;; Agenda styling
+   org-agenda-tags-column 0
+   org-agenda-block-separator ?─
+   org-agenda-time-grid
+   '((daily today require-timed)
+     (800 1000 1200 1400 1600 1800 2000)
+     " ┄┄┄┄┄ " "┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄")
+   org-agenda-current-time-string
+   "⭠ now ─────────────────────────────────────────────────")
 
-  (add-hook 'server-after-make-frame-hook 'my-show-org-agenda-on-connect)
+  (global-org-modern-mode)
+
+  ;; Choose some fonts
+  (set-face-attribute 'default nil :family "Iosevka")
+  (set-face-attribute 'variable-pitch nil :family "Iosevka Aile")
+  (set-face-attribute 'org-modern-symbol nil :family "Iosevka")
+
+  ;; Fontaine
+  (setq fontaine-presets
+        '((tiny
+           :default-family "Iosevka Comfy Wide Fixed"
+           :default-height 70)
+          (small
+           :default-family "Iosevka Comfy Fixed"
+           :default-height 90)
+          (regular
+           :default-height 100)
+          (medium
+           :default-height 110)
+          (large
+           :default-weight semilight
+           :default-height 140
+           :bold-weight extrabold)
+          (presentation
+           :default-weight semilight
+           :default-height 170
+           :bold-weight extrabold)
+          (t
+           ;; I keep all properties for didactic purposes, but most can be
+           ;; omitted.  See the fontaine manual for the technicalities:
+           ;; <https://protesilaos.com/emacs/fontaine>.
+           :default-family "Iosevka Comfy"
+           :default-weight regular
+           :default-height 100
+           :fixed-pitch-family nil ; falls back to :default-family
+           :fixed-pitch-weight nil ; falls back to :default-weight
+           :fixed-pitch-height 1.0
+           :variable-pitch-family "Iosevka Comfy Duo"
+           :variable-pitch-weight nil
+           :variable-pitch-height 1.0
+           :bold-family nil ; use whatever the underlying face has
+           :bold-weight bold
+           :italic-family nil
+           :italic-slant italic
+           :line-spacing nil)))
+
+  (fontaine-set-preset 'medium)
+
+  ;; Line numbers 
+  (defun my-display-numbers-hook ()
+    (display-line-numbers-mode 1)
+    )
+  (add-hook 'prog-mode-hook 'my-display-numbers-hook)
+
+  (require 'pulsar)
+
+  (setq pulsar-pulse t)
+  (setq pulsar-delay 0.055)
+  (setq pulsar-iterations 10)
+  (setq pulsar-face 'pulsar-red)
+  (setq pulsar-highlight-face 'pulsar-yellow)
+
+  (pulsar-global-mode 1)
 #+end_src
 
 * Repositorios
 
-Aquí se configura los repositorios elpa y melpa, creo que con estos
-dos los usuarios podrás encontrar la mayoría de los paquetes que
-busquen, configurando a la vez "use-package" que es muy útil para
-configurar dichos paquetes.
+Aquí se configura los repositorios elpa y melpa, creo que con estos dos los usuarios podrás encontrar la mayoría de los paquetes que busquen, configurando a la vez "use-package" que es muy útil para configurar dichos paquetes.
 
 Esto es enteramente sacado de System Crafters y su saga EFS.
 
@@ -214,7 +245,7 @@ Esto es enteramente sacado de System Crafters y su saga EFS.
   (require 'package)
 
   (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-			   ("elpa" . "https://elpa.gnu.org/packages/")))
+                           ("elpa" . "https://elpa.gnu.org/packages/")))
 
   (package-initialize)
   (unless package-archive-contents
@@ -225,12 +256,13 @@ Esto es enteramente sacado de System Crafters y su saga EFS.
 
   (require 'use-package)
   (setq use-package-always-ensure t)
+
+  (pdf-tools-install)
 #+end_src
 
 * Packages
 
-En esta sección se instalan y configuran los paquetes que serán
-instalados a través de usa-packages.
+En esta sección se instalan y configuran los paquetes que serán instalados a través de usa-packages.
 
 #+begin_src emacs-lisp
   ;; Enable vertico
@@ -246,114 +278,136 @@ instalados a través de usa-packages.
     (setq completion-styles '(orderless basic)
           completion-category-defaults nil
           completion-category-overrides '((file (styles partial-completion)))))
-    #+end_src
+
+  (add-hook 'after-init-hook 'global-company-mode)
+#+end_src
 
 * Dired
 
-Esto es un pequeño ajuste para que no aparezcan todos los archivos
-ocultos en Dired, haciéndolo un poco más simple.
+Esto es un pequeño ajuste para que no aparezcan todos los archivos ocultos en Dired, haciéndolo un poco más simple.
 
 #+begin_src emacs-lisp
   (add-hook 'dired-mode-hook 'dired-hide-details-mode)
+  (add-hook 'dired-mode-hook #'denote-dired-mode)
 #+end_src
 
 * Theme
 
 #+begin_src emacs-lisp
-  (setq modus-themes-italic-constructs t
-        modus-themes-bold-constructs nil
-        modus-themes-no-mixed-fonts nil
-        modus-themes-subtle-line-numbers nil
-        modus-themes-success-deuteranopia t
-        modus-themes-tabs-accented t
-        modus-themes-inhibit-reload t ; only applies to `customize-set-variable' and related
+  ;; Make customisations that affect Emacs faces BEFORE loading a theme
+  ;; (any change needs a theme re-load to take effect).
+  (require 'ef-themes)
 
-        modus-themes-fringes 'nil ; {nil,'subtle,'intense}
+  ;; If you like two specific themes and want to switch between them, you
+  ;; can specify them in `ef-themes-to-toggle' and then invoke the command
+  ;; `ef-themes-toggle'.  All the themes are included in the variable
+  ;; `ef-themes-collection'.
+  (setq ef-themes-to-toggle '(ef-melissa-light ef-melissa-dark))
 
-        ;; Options for `modus-themes-lang-checkers' are either nil (the
-        ;; default), or a list of properties that may include any of those
-        ;; symbols: `straight-underline', `text-also', `background',
-        ;; `intense'
-        modus-themes-lang-checkers '(intense text-also)
+  (setq ef-themes-headings ; read the manual's entry or the doc string
+        '((0 variable-pitch light 1.9)
+          (1 variable-pitch light 1.8)
+          (2 variable-pitch regular 1.7)
+          (3 variable-pitch regular 1.6)
+          (4 variable-pitch regular 1.5)
+          (5 variable-pitch 1.4) ; absence of weight means `bold'
+          (6 variable-pitch 1.3)
+          (7 variable-pitch 1.2)
+          (t variable-pitch 1.1)))
 
-        modus-themes-mode-line '(accented intense)
+  ;; They are nil by default...
+  (setq ef-themes-mixed-fonts t
+        ef-themes-variable-pitch-ui t)
 
-        ;; Options for `modus-themes-syntax' are either nil (the default),
-        ;; or a list of properties that may include any of those symbols:
-        ;; `faint', `yellow-comments', `green-strings', `alt-syntax'
-        modus-themes-syntax 'yellow-comments
+  ;; Read the doc string or manual for this one.  The symbols can be
+  ;; combined in any order.
+  (setq ef-themes-region '(intense no-extend neutral))
 
-        ;; Options for `modus-themes-hl-line' are either nil (the default),
-        ;; or a list of properties that may include any of those symbols:
-        ;; `accented', `underline', `intense'
-        modus-themes-hl-line '(underline accented)
+  ;; Disable all other themes to avoid awkward blending:
+  (mapc #'disable-theme custom-enabled-themes)
 
-        ;; Options for `modus-themes-paren-match' are either nil (the
-        ;; default), or a list of properties that may include any of those
-        ;; symbols: `bold', `intense', `underline'
-        modus-themes-paren-match '(bold intense)
-
-        ;; Options for `modus-themes-links' are either nil (the default),
-        ;; or a list of properties that may include any of those symbols:
-        ;; `neutral-underline' OR `no-underline', `faint' OR `no-color',
-        ;; `bold', `italic', `background'
-        modus-themes-links '(neutral-underline background)
-
-        ;; Options for `modus-themes-prompts' are either nil (the
-        ;; default), or a list of properties that may include any of those
-        ;; symbols: `background', `bold', `gray', `intense', `italic'
-        modus-themes-prompts '(intense bold)
-
-        modus-themes-completions 'moderate ; {nil,'moderate,'opinionated}
-
-        modus-themes-mail-citations 'monochrome ; {nil,'faint,'monochrome}
-
-        ;; Options for `modus-themes-region' are either nil (the default),
-        ;; or a list of properties that may include any of those symbols:
-        ;; `no-extend', `bg-only', `accented'
-        modus-themes-region '(bg-only no-extend)
-
-        ;; Options for `modus-themes-diffs': nil, 'desaturated,
-        ;; 'bg-only, 'deuteranopia, 'fg-only-deuteranopia
-        modus-themes-diffs 'fg-only-deuteranopia
-
-        modus-themes-org-blocks 'tinted-background ; {nil,'gray-background,'tinted-background}
-
-        modus-themes-org-agenda ; this is an alist: read the manual or its doc string
-        '((header-block . (variable-pitch scale-title))
-          (header-date . (grayscale workaholic bold-today))
-          (event . (accented scale-small))
-          (scheduled . uniform)
-          (habit . traffic-light-deuteranopia))
-
-        modus-themes-headings ; this is an alist: read the manual or its doc string
-        '((1 . (overline background))
-          (2 . (rainbow overline))
-          (t . (no-bold)))
-
-        modus-themes-variable-pitch-ui nil
-        modus-themes-variable-pitch-headings t
-        modus-themes-scale-headings t
-        modus-themes-scale-1 1.1
-        modus-themes-scale-2 1.15
-        modus-themes-scale-3 1.21
-        modus-themes-scale-4 1.27
-        modus-themes-scale-title 1.33)
-
-  ;; Load Theme
-  (load-theme 'modus-operandi t)            ; Light theme
+  ;; OR use this to load the theme which also calls `ef-themes-post-load-hook':
+  (ef-themes-select 'ef-melissa-light)
 #+end_src
+
+* Denote
+
+Configuración de la herramienta de gestión de notas. Otra más del gran Prot.
+
+#+BEGIN_SRC emacs-lisp
+
+  (require 'denote)
+
+  ;; Remember to check the doc strings of those variables.
+  (setq denote-directory (expand-file-name "~/Public/docs/notes/"))
+  (setq denote-known-keywords '("emacs" "philosophy" "politics" "economics" "derecho"))
+  (setq denote-infer-keywords t)
+  (setq denote-sort-keywords t)
+  (setq denote-file-type nil) ; Org is the default, set others here
+  (setq denote-prompts '(title keywords))
+  (setq denote-excluded-directories-regexp nil)
+  (setq denote-excluded-keywords-regexp nil)
+
+  ;; Pick dates, where relevant, with Org's advanced interface:
+  (setq denote-date-prompt-use-org-read-date t)
+
+  ;; We do not allow multi-word keywords by default.  The author's
+  ;; personal preference is for single-word keywords for a more rigid
+  ;; workflow.
+  (setq denote-allow-multi-word-keywords t)
+
+  (setq denote-date-format nil) ; read doc string
+
+  ;; By default, we do not show the context of links.  We just display
+  ;; file names.  This provides a more informative view.
+  (setq denote-backlinks-show-context t)
+
+  ;; If you use Markdown or plain text files (Org renders links as buttons
+  ;; right away)
+  (add-hook 'find-file-hook #'denote-link-buttonize-buffer)
+
+  ;; Register Denote's Org dynamic blocks
+  (require 'denote-org-dblock)
+
+  (require 'savehist)
+  (setq savehist-file (locate-user-emacs-file "savehist"))
+  (setq history-length 500)
+  (setq history-delete-duplicates t)
+  (setq savehist-save-minibuffer-history t)
+  (add-hook 'after-init-hook #'savehist-mode)
+
+  (defun my-denote-journal ()
+    "Create an entry tagged 'journal' with the date as its title.
+       If a journal for the current day exists, visit it.  If multiple
+       entries exist, prompt with completion for a choice between them.
+       Else create a new file."
+    (interactive)
+    (let* ((today (format-time-string "%A %e %B %Y"))
+           (string (denote-sluggify today))
+           (files (denote-directory-files-matching-regexp string)))
+      (cond
+       ((> (length files) 1)
+        (find-file (completing-read "Select file: " files nil :require-match)))
+       (files
+        (find-file (car files)))
+       (t
+        (denote
+         today
+         '("journal"))))))
+
+  (setq denote-templates
+        `((document . "#+LaTeX_CLASS: article\n#+LaTeX_CLASS_OPTIONS: [letterpaper]\n#+SETUPFILE: ~/.emacs.d/latex.setup\n#+bibliography: ~/Public/docs/recursos/bib.bib\n#+OPTIONS: toc:nil\n\n---------------------------------------------------------------------------------------------------\n\n")))
+#+END_SRC
 
 * Org
 :LOGBOOK:
 :END:
 
-Estas son algunas configuraciones para el uso general de los archivos
-en org.  Como por ejemplo el spell-check, sangría, modifica el símbolo
-de folded de los headlines.
+Estas son algunas configuraciones para el uso general de los archivos en org.  Como por ejemplo el spell-check, sangría, modifica el símbolo de folded de los headlines.
 
 #+begin_src emacs-lisp
   (add-hook 'org-mode-hook 'turn-on-flyspell)
+  (add-hook 'org-mode-hook 'olivetti-mode)
   (setq org-startup-indented t
         org-pretty-entities t
         org-adapt-indentation t
@@ -361,51 +415,11 @@ de folded de los headlines.
         org-hide-leading-stars t
         org-image-actual-width '(300))
 
-  (setq org-todo-keywords
-        '((sequence "TODO" "EN CURSO" "ESPERANDO" "|" "DONE" "CANCELADO" "POSTERGADO")))
-
-  (setq org-agenda-columns-add-appointments-to-effort-sum t)
-  (setq org-agenda-columns-add-appointments-to-effort-sum "Eff")
-  (setq org-agenda-columns-compute-summary-properties "Effort(Effort)")
-
-  ;; Files
-  (setq org-agenda-files '("~/Public/docs/notes/"))
-
-
-  ;; Configurar directorio de notas
-  (setq org-directory "~/Public/docs/files/nots")
-
-  ;; Configurar agenda personalizada
-  (setq org-agenda-custom-commands
-        '(("c" "Agenda y tareas pendientes"
-           ((agenda "")
-            (todo "TODO")))
-          ("n" "Notas" tags "NOTE")
-          ))
-  ;; Definir la etiqueta para notas
-  (setq org-tag-alist '(("NOTE" . ?n)
-                        ("IMPORTANTE" . ?i)
-                        ("TRABAJO" . ?t)))
-
-
-  ;; Configurar Org Captures
-  (define-key global-map (kbd "C-c c") 'org-capture)
-  (setq org-capture-templates
-        '(("t" "Tarea" entry (file+headline "~/Public/docs/notes/tareas.org" "Tareas pendientes")
-           "* TODO %?\n %i\n %a")
-          ("n" "Nota" entry (file+headline "~/Public/docs/notes/notas.org" "Notas")
-           "* %? :NOTE:\n %i\n %a\n"
-           :prepend t
-           :empty-lines 1
-           :prepend-value (concat (format-time-string "[%Y-%m-%d %H:%M]") "\n") 
-           )))
-
 #+end_src
 
 * Org-Agenda
 
-Estas son configuraciones para traducir el calendario y agenda que en
-algún momento los encontré por internet y me pareció perfecto.
+Estas son configuraciones para traducir el calendario y agenda que en algún momento los encontré por internet y me pareció perfecto.
 
 #+begin_src emacs-lisp
   ;; Calendar
@@ -416,46 +430,22 @@ algún momento los encontré por internet y me pareció perfecto.
   (setq calendar-month-abbrev-array ["Ene" "Feb" "Mar" "Abr" "May" "Jun" "Jul" "Ago" "Sep" "Oct" "Nov" "Dic"])
   (setq calendar-month-name-array ["enero" "febrero" "marzo" "abril" "mayo" "junio" "julio" "agosto" "septiembre" "octubre" "noviembre" "diciembre"])
 
-  ;; Agenda
-  (setq org-agenda-start-with-log-mode t)
-  (setq org-log-done 'time)
-  (setq org-log-into-drawer t)
-
-  ;; Resume clocking task when emacs is restarted
-  (org-clock-persistence-insinuate)
-  ;; Show lot of clocking history so it's easy to pick items off the C-F11 list
-  (setq org-clock-history-length 23)
-  ;; Resume clocking task on clock-in if the clock is open
-  (setq org-clock-in-resume t)
-  ;; Sometimes I change tasks I'm clocking quickly - this removes clocked tasks with 0:00 duration
-  (setq org-clock-out-remove-zero-time-clocks t)
-  ;; Clock out when moving task to a done state
-  (setq org-clock-out-when-done t)
-  ;; Save the running clock and all clock history when exiting Emacs, load it on startup
-  (setq org-clock-persist t)
-  ;; Include current clocking task in clock reports
-  (setq org-clock-report-include-clocking-task t)
-
-  (setq org-return-follows-link t)
-
-  (setq org-agenda-time-grid '((daily today require-timed remove-match)
-                               (800 1000 1200 1400 1600 1800)
-                               "......" "----------------"))
 #+end_src
 
 * Latex
 
-Esto es algo tomado de [[https://www.youtube.com/@JakeBox0][Jake B]] por lo que recomiendo ver su vídeo que
-dejaré [[https://jakebox.github.io/youtube/org_latex_video.html][aquí]].
+Esto es algo tomado de [[https://www.youtube.com/@JakeBox0][Jake B]] por lo que recomiendo ver su vídeo que dejaré [[https://jakebox.github.io/youtube/org_latex_video.html][aquí]].
 
 #+begin_src emacs-lisp
+  (setq org-latex-with-hyperref nil)
+
   (with-eval-after-load 'ox-latex
     (add-to-list 'org-latex-classes
                  '("org-plain-latex"
                    "\\documentclass{article}
-                               [NO-DEFAULT-PACKAGES]
-                               [PACKAGES]
-                               [EXTRA]"
+               [NO-DEFAULT-PACKAGES]
+               [PACKAGES]
+               [EXTRA]"
                    ("\\section{%s}" . "\\section*{%s}")
                    ("\\subsection{%s}" . "\\subsection*{%s}")
                    ("\\subsubsection{%s}" . "\\subsubsection*{%s}")
@@ -478,12 +468,6 @@ dejaré [[https://jakebox.github.io/youtube/org_latex_video.html][aquí]].
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
   (add-hook 'LaTeX-mode-hook 'flyspell-mode)
 
-  ;; Configuración para sincronización con Evince y SyncTeX
-  (setq TeX-source-correlate-start-server t)
-  (setq TeX-source-correlate-mode t)
-  (setq TeX-view-program-selection '((output-pdf "Evince")))
-  (setq TeX-source-correlate-method 'synctex) ; Opción para utilizar SyncTeX
-
   ;; Configuración para utilizar minted con AUCTeX
   (setq LaTeX-command "latex -shell-escape")
 
@@ -492,14 +476,11 @@ dejaré [[https://jakebox.github.io/youtube/org_latex_video.html][aquí]].
 
   ;; Activa el resaltado de paréntesis correspondientes
   (show-paren-mode 1)
-
 #+end_src
 
 * Key Maps
 
-Por último, estableceremos los atajos de teclado para que alguna de
-las funciones más utilizadas estén "más a la mano" a la hora de
-trabajar.
+Por último, estableceremos los atajos de teclado para que alguna de las funciones más utilizadas estén "más a la mano" a la hora de trabajar.
 
 #+begin_src emacs-lisp
   ;; Org
@@ -514,6 +495,49 @@ trabajar.
   ;; Unfill
   (define-key global-map "\M-Q" 'unfill-paragraph)
   ;; Toggle theme 
-  (define-key global-map (kbd "<f5>") 'modus-themes-toggle)
+  (define-key global-map (kbd "<f5>") 'ef-themes-toggle)
+  ;; Denote
+  (let ((map global-map))
+    (define-key map (kbd "C-c n j") #'my-denote-journal) ; our custom command
+    (define-key map (kbd "C-c n n") #'denote)
+    (define-key map (kbd "C-c n N") #'denote-type)
+    (define-key map (kbd "C-c n d") #'denote-date)
+    (define-key map (kbd "C-c n z") #'denote-signature) ; "zettelkasten" mnemonic
+    (define-key map (kbd "C-c n s") #'denote-subdirectory)
+    (define-key map (kbd "C-c n t") #'denote-template)
+    ;; If you intend to use Denote with a variety of file types, it is
+    ;; easier to bind the link-related commands to the `global-map', as
+    ;; shown here.  Otherwise follow the same pattern for `org-mode-map',
+    ;; `markdown-mode-map', and/or `text-mode-map'.
+    (define-key map (kbd "C-c n i") #'denote-link) ; "insert" mnemonic
+    (define-key map (kbd "C-c n I") #'denote-add-links)
+    (define-key map (kbd "C-c n b") #'denote-backlinks)
+    (define-key map (kbd "C-c n f f") #'denote-find-link)
+    (define-key map (kbd "C-c n f b") #'denote-find-backlink)
+    ;; Note that `denote-rename-file' can work from any context, not just
+    ;; Dired bufffers.  That is why we bind it here to the `global-map'.
+    (define-key map (kbd "C-c n r") #'denote-rename-file)
+    (define-key map (kbd "C-c n R") #'denote-rename-file-using-front-matter))
+
+  ;; Key bindings specifically for Dired.
+  (let ((map dired-mode-map))
+    (define-key map (kbd "C-c C-d C-i") #'denote-link-dired-marked-notes)
+    (define-key map (kbd "C-c C-d C-r") #'denote-dired-rename-marked-files)
+    (define-key map (kbd "C-c C-d C-R") #'denote-dired-rename-marked-files-using-front-matter))
+
+  (with-eval-after-load 'org-capture
+    (setq denote-org-capture-specifiers "%l\n%i\n%?")
+    (add-to-list 'org-capture-templates
+                 '("n" "New note (with denote.el)" plain
+                   (file denote-last-path)
+                   #'denote-org-capture
+                   :no-save t
+                   :immediate-finish nil
+                   :kill-buffer t
+                   :jump-to-captured t)))
+  ;; Pulsar
+  (let ((map global-map))
+    (define-key map (kbd "C-c h p") #'pulsar-pulse-line)
+    (define-key map (kbd "C-c h h") #'pulsar-highlight-line))
 #+end_src
 
