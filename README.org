@@ -170,6 +170,57 @@ En esta primera etapa la configuración realiza pequeños ajustes para que la in
    org-agenda-current-time-string
    "⭠ now ─────────────────────────────────────────────────")
 
+
+#+end_src
+
+* Repositorios
+
+Aquí se configura los repositorios elpa y melpa, creo que con estos dos los usuarios podrás encontrar la mayoría de los paquetes que busquen, configurando a la vez "use-package" que es muy útil para configurar dichos paquetes.
+
+Esto es enteramente sacado de System Crafters y su saga EFS.
+
+#+begin_src emacs-lisp
+  (require 'package)
+
+  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
+                           ("elpa" . "https://elpa.gnu.org/packages/")))
+
+  (package-initialize)
+  (unless package-archive-contents
+    (package-refresh-contents))
+
+  (unless (package-installed-p 'use-package)
+    (package-install 'use-package))
+
+  (require 'use-package)
+  (setq use-package-always-ensure t)
+
+
+#+end_src
+
+* Packages
+
+En esta sección se instalan y configuran los paquetes que serán instalados a través de usa-packages.
+
+#+begin_src emacs-lisp
+  ;; Enable vertico
+  (use-package vertico
+    :init
+    (vertico-mode))
+
+  (use-package tex
+    :ensure auctex)
+
+  (use-package orderless
+    :init
+    (setq completion-styles '(orderless basic)
+          completion-category-defaults nil
+          completion-category-overrides '((file (styles partial-completion)))))
+
+  (use-package company)
+  (add-hook 'after-init-hook 'global-company-mode)
+
+  (use-package org-modern)
   (global-org-modern-mode)
 
   ;; Choose some fonts
@@ -177,6 +228,7 @@ En esta primera etapa la configuración realiza pequeños ajustes para que la in
   (set-face-attribute 'variable-pitch nil :family "Iosevka Aile")
   (set-face-attribute 'org-modern-symbol nil :family "Iosevka")
 
+  (use-package fontaine)
   ;; Fontaine
   (setq fontaine-presets
         '((tiny
@@ -216,7 +268,7 @@ En esta primera etapa la configuración realiza pequeños ajustes para que la in
            :italic-slant italic
            :line-spacing nil)))
 
-  (fontaine-set-preset 'medium)
+  (fontaine-set-preset 'regular)
 
   ;; Line numbers 
   (defun my-display-numbers-hook ()
@@ -224,6 +276,7 @@ En esta primera etapa la configuración realiza pequeños ajustes para que la in
     )
   (add-hook 'prog-mode-hook 'my-display-numbers-hook)
 
+  (use-package pulsar)
   (require 'pulsar)
 
   (setq pulsar-pulse t)
@@ -232,54 +285,9 @@ En esta primera etapa la configuración realiza pequeños ajustes para que la in
   (setq pulsar-face 'pulsar-red)
   (setq pulsar-highlight-face 'pulsar-yellow)
 
+  (use-package pdf-tools)
   (pulsar-global-mode 1)
-#+end_src
-
-* Repositorios
-
-Aquí se configura los repositorios elpa y melpa, creo que con estos dos los usuarios podrás encontrar la mayoría de los paquetes que busquen, configurando a la vez "use-package" que es muy útil para configurar dichos paquetes.
-
-Esto es enteramente sacado de System Crafters y su saga EFS.
-
-#+begin_src emacs-lisp
-  (require 'package)
-
-  (setq package-archives '(("melpa" . "https://melpa.org/packages/")
-                           ("elpa" . "https://elpa.gnu.org/packages/")))
-
-  (package-initialize)
-  (unless package-archive-contents
-    (package-refresh-contents))
-
-  (unless (package-installed-p 'use-package)
-    (package-install 'use-package))
-
-  (require 'use-package)
-  (setq use-package-always-ensure t)
-
   (pdf-tools-install)
-#+end_src
-
-* Packages
-
-En esta sección se instalan y configuran los paquetes que serán instalados a través de usa-packages.
-
-#+begin_src emacs-lisp
-  ;; Enable vertico
-  (use-package vertico
-    :init
-    (vertico-mode))
-
-  (use-package tex
-    :ensure auctex)
-
-  (use-package orderless
-    :init
-    (setq completion-styles '(orderless basic)
-          completion-category-defaults nil
-          completion-category-overrides '((file (styles partial-completion)))))
-
-  (add-hook 'after-init-hook 'global-company-mode)
 #+end_src
 
 * Dired
