@@ -302,6 +302,7 @@ Esto es un pequeño ajuste para que no aparezcan todos los archivos ocultos en D
 #+begin_src emacs-lisp
   ;; Make customisations that affect Emacs faces BEFORE loading a theme
   ;; (any change needs a theme re-load to take effect).
+  (use-package ef-themes)
   (require 'ef-themes)
 
   ;; If you like two specific themes and want to switch between them, you
@@ -311,19 +312,19 @@ Esto es un pequeño ajuste para que no aparezcan todos los archivos ocultos en D
   (setq ef-themes-to-toggle '(ef-melissa-light ef-melissa-dark))
 
   (setq ef-themes-headings ; read the manual's entry or the doc string
-        '((0 variable-pitch light 1.9)
-          (1 variable-pitch light 1.8)
-          (2 variable-pitch regular 1.7)
-          (3 variable-pitch regular 1.6)
-          (4 variable-pitch regular 1.5)
-          (5 variable-pitch 1.4) ; absence of weight means `bold'
-          (6 variable-pitch 1.3)
-          (7 variable-pitch 1.2)
-          (t variable-pitch 1.1)))
+	'((0 variable-pitch light 1.9)
+	  (1 variable-pitch light 1.8)
+	  (2 variable-pitch regular 1.7)
+	  (3 variable-pitch regular 1.6)
+	  (4 variable-pitch regular 1.5)
+	  (5 variable-pitch 1.4) ; absence of weight means `bold'
+	  (6 variable-pitch 1.3)
+	  (7 variable-pitch 1.2)
+	  (t variable-pitch 1.1)))
 
   ;; They are nil by default...
   (setq ef-themes-mixed-fonts t
-        ef-themes-variable-pitch-ui t)
+	ef-themes-variable-pitch-ui t)
 
   ;; Read the doc string or manual for this one.  The symbols can be
   ;; combined in any order.
@@ -342,6 +343,7 @@ Configuración de la herramienta de gestión de notas. Otra más del gran Prot.
 
 #+BEGIN_SRC emacs-lisp
 
+  (use-package denote)
   (require 'denote)
 
   ;; Remember to check the doc strings of those variables.
@@ -389,20 +391,20 @@ Configuración de la herramienta de gestión de notas. Otra más del gran Prot.
        Else create a new file."
     (interactive)
     (let* ((today (format-time-string "%A %e %B %Y"))
-           (string (denote-sluggify today))
-           (files (denote-directory-files-matching-regexp string)))
+	   (string (denote-sluggify today))
+	   (files (denote-directory-files-matching-regexp string)))
       (cond
        ((> (length files) 1)
-        (find-file (completing-read "Select file: " files nil :require-match)))
+	(find-file (completing-read "Select file: " files nil :require-match)))
        (files
-        (find-file (car files)))
+	(find-file (car files)))
        (t
-        (denote
-         today
-         '("journal"))))))
+	(denote
+	 today
+	 '("journal"))))))
 
   (setq denote-templates
-        `((document . "#+LaTeX_CLASS: article\n#+LaTeX_CLASS_OPTIONS: [letterpaper]\n#+SETUPFILE: ~/.emacs.d/latex.setup\n#+bibliography: ~/Public/docs/recursos/bib.bib\n#+OPTIONS: toc:nil\n\n---------------------------------------------------------------------------------------------------\n\n")))
+	`((document . "#+LaTeX_CLASS: article\n#+LaTeX_CLASS_OPTIONS: [letterpaper]\n#+SETUPFILE: ~/.emacs.d/latex.setup\n#+bibliography: ~/Public/docs/recursos/bib.bib\n#+OPTIONS: toc:nil\n\n---------------------------------------------------------------------------------------------------\n\n")))
 #+END_SRC
 
 * Org
