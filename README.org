@@ -206,6 +206,8 @@ En esta sección se instalan y configuran los paquetes que serán instalados a t
     :init
     (vertico-mode))
 
+  (use-package olivetti)
+
   (use-package tex
     :ensure auctex)
 
@@ -284,8 +286,8 @@ En esta sección se instalan y configuran los paquetes que serán instalados a t
   (setq pulsar-highlight-face 'pulsar-yellow)
 
   (use-package pdf-tools)
+  
   (pulsar-global-mode 1)
-  (pdf-tools-install)
 #+end_src
 
 * Dired
