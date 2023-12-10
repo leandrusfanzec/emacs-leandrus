@@ -7,9 +7,14 @@
 
 [[file:captura.png]]
 
-Esta es una configuración muy básica, pero a la vez cómoda que he podido probar con éxito en la versión 28 y 27 de Emacs, y en las distribuciones de Ubuntu, Fedora, Gentoo y Openbsd. En realidad es una configuración muy mínima y simple por lo que no tendría por qué no funcionar en cualquier otra distribución.
 
-Como bien deslizaba en el párrafo anterior, se trata de la configuración básica y minimalista que personalmente he tratado de mantener, pero estimo sinceramente que, puede ser de utilidad a los usuarios que deseen conocer por primera vez la capacidad de Emacs.
+Esta es una configuración que busca ser básica, pero a la vez cómoda que he podido probar con éxito en la versión 29 de Emacs, y en las distribuciones Ubuntu, Fedora, Gentoo, Openbsd, Arch.
+
+Cabe señalar que, esta configuración está pensada para aquellos que busquen una aproximación más /"amigable"/ a este programa y para un uso básico de documentos.
+
+En este sentido, la configuración está principalmente girada hacia el uso de org-mode y su capacidad de exportar a diferentes tipos de formatos.
+
+⚠ No se olvide de instalar las [[⚠ Dependencias][dependencias]] para esta configuración.
 
 * 🤷 ¿Por qué utilizar esta configuración?
 
@@ -21,22 +26,23 @@ Una de las primeras dudas que pudiese aparecer al usuario es la pregunta respect
    aproximándose a Emacs, principalmente en esta parte del mundo en la
    que se habla español y la búsqueda de información se hace difícil.
 
-2. En segundo lugar, porque no se atreve a cambiar su funcionamiento
-   normal, como es el caso de Doomemacs o Vimspace, las cuales ya son
-   muy conocidas y también utilizadas masivamente pero que
-   sobresaturan las funciones normales del programa.
+2. En segundo lugar, porque no se atreve a cambiar su funcionamiento normal, como es el caso de Doomemacs o Vimspace, las cuales ya son muy conocidas y también utilizadas masivamente pero que, (según mi opinión), sobresaturan las funciones normales del programa.
 
-3. En cambio esta configuración, tal como podemos observar de la
-   lectura de la sección [[Packages][Packages]], son apenas los siguientes:
+3. En cambio, esta configuración tal como podemos observar de la lectura de la sección [[Packages][Packages]], son apenas los siguientes:
 
-   + vertico
-   + orderless
-   + consult
+   + [[https://github.com/minad/vertico][vertico]]
+   + [[https://github.com/rnkn/olivetti][olivetti]]
+   + [[https://github.com/oantolin/orderless][orderless]]
+   + [[https://github.com/company-mode/company-mode][company]]
+   + [[https://github.com/minad/org-modern][org-modern]]
+   + [[https://github.com/protesilaos/fontaine][fontaine]]
+   + [[https://github.com/protesilaos/pulsar][pulsar]]
+   + [[https://github.com/vedang/pdf-tools][pdf-tools]]
+   + [[https://github.com/protesilaos/ef-themes][ef-themes]]
+   + [[https://www.gnu.org/software/auctex/][auctex]]
+   + [[https://github.com/protesilaos/denote][denote]]
 
-4. Es una buena manera de aprender conocer el sistema tal como es,
-   porque de esta manera es más fácil de buscar información. Con esto
-   quiero decir que, la información siempre es más abundante con
-   programas estandarizados, por el mero hecho de que es más común.
+4. Es una buena manera de aprender conocer el sistema tal como es, porque de esta manera es más fácil de buscar información. Con esto quiero decir que, la información siempre es más abundante con programas estandarizados, por el mero hecho de que ese aspecto lo hace más común.
 
 ** 📰 Template Latex
 
@@ -44,7 +50,7 @@ Como se puede observar en la sección [[Latex][Latex]], he tomado la template qu
 
 Para poder utilizar ese archivo de configuración como ahí se señala, se debe tener un archivo de setup que también está en este repositorio, que, _es de completa autoría de Jake B_, yo solamente modifique algunas cosas para español conforme a mis necesidades.
 
-Dicho archivo debe ser invocado al inicio de un documento tipo org, de la siguiente manera:
+Dicho archivo, debe ser invocado al inicio de un documento tipo org, de la siguiente manera:
 
 : #+SETUPFILE: ~/.emacs.d/latex.setup
 
@@ -52,7 +58,7 @@ Se puede tomar de ejemplo este mismo documento de configuración, el cual ya vie
 
 Se debe reparar que la ruta que ahí se indica es la de configuración de Emacs, a la cual, anteriormente se habían traspasado los archivos del repositorio, dentro de estos archivos iba también el que invoca ahora denominado "latex.setup".
 
-Para hacerlo aun más didáctico este mismo archivo ya se encuentra con esa configuración y si quieres probar cómo funciona basta con seguir los siguientes pasos:
+Para hacerlo aun más didáctico este mismo archivo ya se encuentra con esa configuración (al principio del archivo), y si quieres probar cómo funciona basta con seguir los siguientes pasos:
 
 1) Abra Emacs (como se señala más arriba);
 2) Busque el archivo configuración README.org utilizando: C-x C-f y
@@ -63,23 +69,6 @@ Para hacerlo aun más didáctico este mismo archivo ya se encuentra con esa conf
 6) Puedes acompañar el proceso en los avisos que aparece en el
    mini-buffer.
    
-*** ⚠ Dependencias
-
-Para el correcto funcionamiento de la función anteriormente descrita
-debemos tener instalados los siguientes paquetes:
-
-- Texlive ::
-- Texlive-Lua ::
-- Texlive-bibtex ::
-- Aspell-es ::
-
-Los tres primeros son paquetes de Latex, que nos permitirá hacer uso
-de las funciones de exportación a pdf.
-
-El último nos permitirá hacer uso de la función de spell checker (el
-cual, conforme a esta configuración deberá iniciar el modo "fly-spell"
-al abrir cualquier documento org.
-
 * 💻 Instalación
 
 Para realizar la instalación se debiera copiar este repositorio dentro de la misma carpeta de Emacs para ejecutarlo al inicio del programa:
@@ -90,7 +79,35 @@ Para realizar la instalación se debiera copiar este repositorio dentro de la mi
 
 : cp * ~/.emacs.d/
 
-_Aviso_: Lo que se está haciendo en el último comando es copiar los archivos del repositorio a la carpeta de configuraciones de Emacs. Esta carpeta solamente se crea cuando *se haya abierto alguna vez el programa*, por lo que si nosotros simplemente instalamos Emacs y luego copiamos dichos documentos nos saldrá un error señalando que dicho destino (/la carpeta de configuracion ".emacs.d"/), no existe. Nada impide, por otro lado, que lo hagamos nosotros mismos con el comando /mkdir/ (en tal caso, lo haríamos con: "mkdir $HOME/.emacs.d").
+_Aviso_: Lo que se está haciendo en el último comando es copiar los archivos del repositorio a la carpeta de configuraciones de Emacs. Esta carpeta solamente se crea cuando *se haya abierto alguna vez el programa*, por lo que si nosotros simplemente instalamos Emacs y luego copiamos dichos documentos nos saldrá un error señalando que dicho destino (/la carpeta de configuración ".emacs.d"/), no existe. Nada impide, por otro lado, que lo hagamos nosotros mismos con el comando /mkdir/ (en tal caso, lo haríamos con: /"mkdir $HOME/.emacs.d"/).
+
+*** ⚠ Dependencias
+
+Para el correcto funcionamiento de la función anteriormente descrita debemos tener instalados los siguientes paquetes:
+
+- Texlive ::
+- Texlive-Lua ::
+- Texlive-bibtex ::
+- Aspell-es ::
+- pdf-tool-install :: Después de iniciar por primera vez el programa, se recomienda ejecutar ese comando para instalar pdf-tool-install (M-x pdf-tool-install).
+- Iosevka e [[https://github.com/protesilaos/iosevka-comfy][Iosevka-Confy]] :: Se utiliza esta fuente en esta configuración, todas las distribuciones en general tienen en su repositorio el primero, el segundo se debe descargar del repositorio y enviarlo a "/usr/share/fonts".
+
+Los tres primeros son paquetes de Latex, que nos permitirá hacer uso
+de las funciones de exportación a pdf.
+
+El tercero, nos permitirá hacer uso de la función de spell checker (el cual, conforme a esta configuración deberá iniciar el modo "fly-spell" al abrir cualquier documento org.
+
+Pdf-tool, es un paquete de lector de pdf más optimizado que el docview que utiliza Emacs por defecto. Vale la pena probarlo!
+
+Iosevka es una tipografía, actualmente me parece muy bien, pero sé que es una cuestión de gustos. 
+
+*** Issues
+
+Hay un problema que aun no he podido solucionar que consiste en el color del frame cuando se divide en 2 horizontales.
+
+Si alguien sabe como arreglar eso, será bienvenida su ayuda.
+
+[[file:issue.png]]
 
 * 💡 Consejos para Uso
 ** Daemon y Cliente
@@ -99,7 +116,7 @@ Para un mejor en general, se recomienda iniciar el programa Emacs como daemon y 
 
 - /ejemplo genérico:/
 
-: emacs -daemon
+: emacs --daemon
 
 En este momento cargará la configuración, los repositorios y paquetes. Al final debiese aparecer un aviso diciendo que el demonio ha iniciado.
 
@@ -129,8 +146,9 @@ En esta primera etapa la configuración realiza pequeños ajustes para que la in
   (blink-cursor-mode -1)
   ;; Easy-Kill de buffer whitout modifications
   (global-set-key [(control x) (k)] 'kill-this-buffer)
+  
   ;; Puedes incluir el nombre usuario entre las colmillas:
-  (setq user-full-name "Lucas Fernandez")
+  (setq user-full-name "")
 
   ;; Unfill Function
   ;; Stefan Monnier <foo at acm.org>. It is the opposite of fill-paragraph
@@ -344,7 +362,6 @@ Esto es un pequeño ajuste para que no aparezcan todos los archivos ocultos en D
 Configuración de la herramienta de gestión de notas. Otra más del gran Prot.
 
 #+BEGIN_SRC emacs-lisp
-
   (use-package denote)
   (require 'denote)
 
@@ -410,8 +427,6 @@ Configuración de la herramienta de gestión de notas. Otra más del gran Prot.
 #+END_SRC
 
 * Org
-:LOGBOOK:
-:END:
 
 Estas son algunas configuraciones para el uso general de los archivos en org.  Como por ejemplo el spell-check, sangría, modifica el símbolo de folded de los headlines.
 
@@ -424,7 +439,6 @@ Estas son algunas configuraciones para el uso general de los archivos en org.  C
         org-odd-levels-only t
         org-hide-leading-stars t
         org-image-actual-width '(300))
-
 #+end_src
 
 * Org-Agenda
@@ -439,7 +453,6 @@ Estas son configuraciones para traducir el calendario y agenda que en algún mom
   (setq calendar-day-name-array ["domingo" "lunes" "martes" "miércoles" "jueves" "viernes" "sábado"])
   (setq calendar-month-abbrev-array ["Ene" "Feb" "Mar" "Abr" "May" "Jun" "Jul" "Ago" "Sep" "Oct" "Nov" "Dic"])
   (setq calendar-month-name-array ["enero" "febrero" "marzo" "abril" "mayo" "junio" "julio" "agosto" "septiembre" "octubre" "noviembre" "diciembre"])
-
 #+end_src
 
 * Latex
@@ -550,4 +563,3 @@ Por último, estableceremos los atajos de teclado para que alguna de las funcion
     (define-key map (kbd "C-c h p") #'pulsar-pulse-line)
     (define-key map (kbd "C-c h h") #'pulsar-highlight-line))
 #+end_src
-
